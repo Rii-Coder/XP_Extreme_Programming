@@ -5,6 +5,11 @@
  */
 package GUI;
 
+import Entities.Curso;
+import ObjetoNegocio.ControlCurso;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Jbran
@@ -14,6 +19,7 @@ public class AdminCursoFm extends javax.swing.JFrame {
     /**
      * Creates new form AdministrarCurso
      */
+    ControlCurso cursoR;
     public AdminCursoFm() {
         initComponents();
     }
@@ -43,7 +49,8 @@ public class AdminCursoFm extends javax.swing.JFrame {
         btnAdminCursosNavegar = new javax.swing.JButton();
         btnAdminGruposNavegar = new javax.swing.JButton();
         btnImportAsistenciasNavegar = new javax.swing.JButton();
-        jTextField2 = new javax.swing.JTextField();
+        btnActualizarTabla = new javax.swing.JButton();
+        txtBuscar = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -119,7 +126,7 @@ public class AdminCursoFm extends javax.swing.JFrame {
                 btnConsultarAsistenciasNavegarActionPerformed(evt);
             }
         });
-        jPanel2.add(btnConsultarAsistenciasNavegar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 370, 170, 90));
+        jPanel2.add(btnConsultarAsistenciasNavegar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 360, 170, 90));
 
         btnAdminCursosNavegar.setText("Administrar Cursos");
         btnAdminCursosNavegar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -148,14 +155,23 @@ public class AdminCursoFm extends javax.swing.JFrame {
         });
         jPanel2.add(btnImportAsistenciasNavegar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, 170, 90));
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 190, 590));
-
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        btnActualizarTabla.setText("Actualizar tabla");
+        btnActualizarTabla.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnActualizarTabla.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                btnActualizarTablaActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 130, 420, -1));
+        jPanel2.add(btnActualizarTabla, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 530, 120, 40));
+
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 190, 590));
+
+        txtBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtBuscarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 130, 420, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -184,49 +200,31 @@ public class AdminCursoFm extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnImportAsistenciasNavegarActionPerformed
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void txtBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_txtBuscarActionPerformed
 
+    private void btnActualizarTablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarTablaActionPerformed
+        // TODO add your handling code here:
+        cargarCursos();
+    }//GEN-LAST:event_btnActualizarTablaActionPerformed
+
+    private void cargarCursos() {
+        List<Curso> cursos = this.cursoR.consultarCursos(txtBuscar.getText());
+        if (cursos != null) {
+            DefaultTableModel modelo = (DefaultTableModel) table.getModel();
+            modelo.setRowCount(0);
+            for (Curso curso : cursos) {
+                modelo.addRow(curso.toArray());
+            }
+        }
+    }
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AdminCursoFm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AdminCursoFm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AdminCursoFm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AdminCursoFm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new AdminCursoFm().setVisible(true);
-            }
-        });
-    }
-
+   
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnActualizarTabla;
     private javax.swing.JButton btnAdminCursosNavegar;
     private javax.swing.JButton btnAdminGruposNavegar;
     private javax.swing.JButton btnAgregarCurso;
@@ -243,6 +241,6 @@ public class AdminCursoFm extends javax.swing.JFrame {
     private javax.swing.JSpinner jSpinner1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField txtBuscar;
     // End of variables declaration//GEN-END:variables
 }
