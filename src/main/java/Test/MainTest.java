@@ -22,6 +22,6 @@ public class MainTest {
         MaestroDAO maestros = new MaestroDAO();
         maestros.agregar(new Maestro(id1, "pepe", "1234", "correo@gmail.com"));
         CursoDAO cursos = new CursoDAO();
-        
+        cursos.agregar(new Curso());
     }
 }
