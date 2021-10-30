@@ -1,6 +1,11 @@
-C:\Users\R2\Documents\GitHub\XP_Extreme_Programming\src\main\java\GUI\AdminCursoFm.java
-C:\Users\R2\Documents\GitHub\XP_Extreme_Programming\src\main\java\GUI\BaseGUI.java
-C:\Users\R2\Documents\GitHub\XP_Extreme_Programming\src\main\java\Entities\Grupo.java
-C:\Users\R2\Documents\GitHub\XP_Extreme_Programming\src\main\java\GUI\LoginGUI.java
-C:\Users\R2\Documents\GitHub\XP_Extreme_Programming\src\main\java\Entities\Curso.java
-C:\Users\R2\Documents\GitHub\XP_Extreme_Programming\src\main\java\Entities\Maestro.java
+C:\Users\braya\OneDrive\Documentos\GitHub\XP_Extreme_Programming\src\main\java\GUI\AdminCursoFm.java
+C:\Users\braya\OneDrive\Documentos\GitHub\XP_Extreme_Programming\src\main\java\DAO\CursoDAO.java
+C:\Users\braya\OneDrive\Documentos\GitHub\XP_Extreme_Programming\src\main\java\DAO\MaestroDAO.java
+C:\Users\braya\OneDrive\Documentos\GitHub\XP_Extreme_Programming\src\main\java\GUI\LoginGUI.java
+C:\Users\braya\OneDrive\Documentos\GitHub\XP_Extreme_Programming\src\main\java\DAO\BaseDAO.java
+C:\Users\braya\OneDrive\Documentos\GitHub\XP_Extreme_Programming\src\main\java\Test\MainTest.java
+C:\Users\braya\OneDrive\Documentos\GitHub\XP_Extreme_Programming\src\main\java\ObjetoNegocio\ControlCurso.java
+C:\Users\braya\OneDrive\Documentos\GitHub\XP_Extreme_Programming\src\main\java\GUI\BaseGUI.java
+C:\Users\braya\OneDrive\Documentos\GitHub\XP_Extreme_Programming\src\main\java\Entities\Maestro.java
+C:\Users\braya\OneDrive\Documentos\GitHub\XP_Extreme_Programming\src\main\java\Entities\Grupo.java
+C:\Users\braya\OneDrive\Documentos\GitHub\XP_Extreme_Programming\src\main\java\Entities\Curso.java
