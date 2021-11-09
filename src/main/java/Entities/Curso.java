@@ -144,6 +144,17 @@ public class Curso {
         }
         return true;
     }
+    public Object[] toArray() {
+        return new Object[]{
+            this.id,
+            this.nombre,
+            this.maestro,
+            this.grupos,
+            this.unidades
+            
+        };
+
+    }
     
     
 }
