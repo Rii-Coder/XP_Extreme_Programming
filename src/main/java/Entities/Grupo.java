@@ -25,6 +25,10 @@ public class Grupo {
     private Long id;
     
     @ManyToOne(optional = false)
+    @JoinColumn(name = "idMaestro")
+    private Maestro maestro;
+    
+    @ManyToOne(optional = false)
     @JoinColumn(name = "idCurso")
     private Curso curso;
 

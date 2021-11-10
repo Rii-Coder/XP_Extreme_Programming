@@ -35,31 +35,24 @@ public class Curso {
     @Column(name = "Nombre", nullable = false, length = 100)
     private String nombre;
     
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "idMaestro")
-    private Maestro maestro;
-    
     @OneToMany(mappedBy = "curso", cascade = CascadeType.ALL)
     private List<Grupo> grupos; //provisional
     
     @Column(name = "unidades", nullable = false)
-    private byte unidades;
+    private int unidades;
 
-    public Curso(){
-        
+    public Curso(){}
+
+    public Curso(String nombre, int unidades) {
+        this.nombre = nombre;
+        this.unidades = unidades;
+        this.grupos = new ArrayList<>();
     }
 
-    public Curso(Long id, String nombre, Maestro maestro, List<Grupo> grupos, byte unidades) {
+    public Curso(Long id, String nombre, List<Grupo> grupos, int unidades) {
         this.id = id;
         this.nombre = nombre;
-        this.maestro = maestro;
         this.grupos = grupos;
-        this.unidades = unidades;
-    }
-    
-    public Curso(String nombre, ArrayList<Grupo> grupo, byte unidades) {
-        this.nombre = nombre;
-        this.grupos = grupo;
         this.unidades = unidades;
     }
 
@@ -69,14 +62,6 @@ public class Curso {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Maestro getMaestro() {
-        return maestro;
-    }
-
-    public void setMaestro(Maestro maestro) {
-        this.maestro = maestro;
     }
 
     public String getNombre() {
@@ -95,26 +80,25 @@ public class Curso {
         this.grupos = grupos;
     }
 
-    public byte getUnidades() {
+    public int getUnidades() {
         return unidades;
     }
 
-    public void setUnidades(byte unidades) {
+    public void setUnidades(int unidades) {
         this.unidades = unidades;
     }
 
     @Override
     public String toString() {
-        return "Curso:" + nombre;
+        return "Curso{" + "id=" + id + ", nombre=" + nombre + ", unidades=" + unidades + '}';
     }
-
+    
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 89 * hash + Objects.hashCode(this.id);
-        hash = 89 * hash + Objects.hashCode(this.nombre);
-        hash = 89 * hash + Objects.hashCode(this.maestro);
-        hash = 89 * hash + this.unidades;
+        int hash = 5;
+        hash = 23 * hash + Objects.hashCode(this.id);
+        hash = 23 * hash + Objects.hashCode(this.nombre);
+        hash = 23 * hash + this.unidades;
         return hash;
     }
 
@@ -139,17 +123,13 @@ public class Curso {
         if (!Objects.equals(this.id, other.id)) {
             return false;
         }
-        if (!Objects.equals(this.maestro, other.maestro)) {
-            return false;
-        }
         return true;
     }
+    
     public Object[] toArray() {
         return new Object[]{
             this.id,
             this.nombre,
-            this.maestro,
-            this.grupos,
             this.unidades
             
         };

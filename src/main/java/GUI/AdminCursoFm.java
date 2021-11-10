@@ -5,8 +5,8 @@
  */
 package GUI;
 
+import DAO.CursoDAO;
 import Entities.Curso;
-import ObjetoNegocio.ControlCurso;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
@@ -14,14 +14,20 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Jbran
  */
-public class AdminCursoFm extends javax.swing.JFrame {
+public class AdminCursoFm extends BaseGUI {
 
     /**
      * Creates new form AdministrarCurso
      */
-    ControlCurso cursoR;
+    private CursoDAO cursoR;
+    private Curso seleccionado;
+    
     public AdminCursoFm() {
+        
         initComponents();
+        cursoR = new CursoDAO();
+        centrarPantalla();
+        cargarCursos();
     }
 
     /**
@@ -34,9 +40,9 @@ public class AdminCursoFm extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtNombreCurso = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jSpinner1 = new javax.swing.JSpinner();
+        spnUnidades = new javax.swing.JSpinner();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -49,7 +55,6 @@ public class AdminCursoFm extends javax.swing.JFrame {
         btnAdminCursosNavegar = new javax.swing.JButton();
         btnAdminGruposNavegar = new javax.swing.JButton();
         btnImportAsistenciasNavegar = new javax.swing.JButton();
-        btnActualizarTabla = new javax.swing.JButton();
         txtBuscar = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -57,11 +62,11 @@ public class AdminCursoFm extends javax.swing.JFrame {
 
         jLabel2.setText("Nombre curso");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 20, -1, -1));
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 50, 150, -1));
+        getContentPane().add(txtNombreCurso, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 50, 150, -1));
 
         jLabel4.setText("Unidades");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 80, 80, -1));
-        getContentPane().add(jSpinner1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 110, -1, -1));
+        getContentPane().add(spnUnidades, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 110, -1, -1));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Cursos existentes"));
 
@@ -70,9 +75,22 @@ public class AdminCursoFm extends javax.swing.JFrame {
 
             },
             new String [] {
-
+                "ID", "Nombre", "Unidades"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -155,15 +173,6 @@ public class AdminCursoFm extends javax.swing.JFrame {
         });
         jPanel2.add(btnImportAsistenciasNavegar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, 170, 90));
 
-        btnActualizarTabla.setText("Actualizar tabla");
-        btnActualizarTabla.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnActualizarTabla.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnActualizarTablaActionPerformed(evt);
-            }
-        });
-        jPanel2.add(btnActualizarTabla, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 530, 120, 40));
-
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 190, 590));
 
         txtBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -171,17 +180,23 @@ public class AdminCursoFm extends javax.swing.JFrame {
                 txtBuscarActionPerformed(evt);
             }
         });
-        getContentPane().add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 130, 420, -1));
+        getContentPane().add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 130, 400, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEditarCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarCursoActionPerformed
-        // TODO add your handling code here:
+        seleccionado.setNombre(txtNombreCurso.getText());
+        int unidades = (Integer) spnUnidades.getValue();
+        seleccionado.setUnidades(unidades);
+        cursoR.actualizar(seleccionado);
+        cargarCursos();
     }//GEN-LAST:event_btnEditarCursoActionPerformed
 
     private void btnAgregarCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarCursoActionPerformed
-        // TODO add your handling code here:
+        int unidades = (Integer) spnUnidades.getValue();
+        cursoR.agregar(new Curso(txtNombreCurso.getText(), unidades));
+        cargarCursos();
     }//GEN-LAST:event_btnAgregarCursoActionPerformed
 
     private void btnConsultarAsistenciasNavegarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarAsistenciasNavegarActionPerformed
@@ -204,27 +219,63 @@ public class AdminCursoFm extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtBuscarActionPerformed
 
-    private void btnActualizarTablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarTablaActionPerformed
-        // TODO add your handling code here:
-        cargarCursos();
-    }//GEN-LAST:event_btnActualizarTablaActionPerformed
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        int seleccionar =jTable1.rowAtPoint(evt.getPoint());
+        Long id = (Long)(jTable1.getValueAt(seleccionar, 0));
+        Curso curso = cursoR.buscarPorId(id);
+        this.seleccionado = curso;
+        txtNombreCurso.setText(curso.getNombre());
+        spnUnidades.setValue(curso.getUnidades());
+    }//GEN-LAST:event_jTable1MouseClicked
 
     private void cargarCursos() {
         List<Curso> cursos = this.cursoR.consultarCursos(txtBuscar.getText());
+        System.out.println(cursos);
         if (cursos != null) {
-            DefaultTableModel modelo = (DefaultTableModel) table.getModel();
+            DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
             modelo.setRowCount(0);
             for (Curso curso : cursos) {
                 modelo.addRow(curso.toArray());
             }
         }
     }
+   
     /**
      * @param args the command line arguments
      */
-   
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(LoginGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(LoginGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(LoginGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(LoginGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new AdminCursoFm().setVisible(true);
+            }
+        });
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnActualizarTabla;
     private javax.swing.JButton btnAdminCursosNavegar;
     private javax.swing.JButton btnAdminGruposNavegar;
     private javax.swing.JButton btnAgregarCurso;
@@ -238,9 +289,9 @@ public class AdminCursoFm extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JSpinner jSpinner1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JSpinner spnUnidades;
     private javax.swing.JTextField txtBuscar;
+    private javax.swing.JTextField txtNombreCurso;
     // End of variables declaration//GEN-END:variables
 }

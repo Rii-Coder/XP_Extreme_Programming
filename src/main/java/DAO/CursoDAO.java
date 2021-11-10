@@ -45,7 +45,6 @@ public class CursoDAO extends BaseDAO<Curso>{
         if (curso != null) {
             curso.setNombre(entidad.getNombre());
             curso.setGrupos(entidad.getGrupos());
-            curso.setMaestro(entidad.getMaestro());
             curso.setUnidades(entidad.getUnidades());
             entityManager.merge(curso);
         }
@@ -71,6 +70,22 @@ public class CursoDAO extends BaseDAO<Curso>{
         List<Curso> curso = query.getResultList();
         entityManager.getTransaction().commit();
         return new ArrayList<>(curso);
+    }
+    
+    public List<Curso> consultarCursos(String nombre){
+        EntityManager entityManager = this.createEntityManager();
+        entityManager.getTransaction().begin();
+        
+        List<Curso> cursos;
+         if (!nombre.equals("")) {
+            String jpql = String.format("SELECT * FROM xp.curso WHERE xp.curso.nombre = '%s';", nombre);
+            cursos = entityManager.createNativeQuery(jpql, Curso.class).getResultList();
+        } else {
+            String jpql = "SELECT * FROM xp.curso;";
+            cursos = entityManager.createNativeQuery(jpql, Curso.class).getResultList();
+        }
+        entityManager.getTransaction().commit();
+        return cursos;
     }
     
 }

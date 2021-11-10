@@ -46,7 +46,7 @@ public class MaestroDAO extends BaseDAO<Maestro>{
             maestro.setCorreo(entidad.getCorreo());
             maestro.setNombre(entidad.getNombre());
             maestro.setContraseña(entidad.getContraseña());
-            maestro.setCursos(entidad.getCursos());
+            maestro.setGrupos(entidad.getGrupos());
             entityManager.merge(maestro);
         }
         entityManager.getTransaction().commit();

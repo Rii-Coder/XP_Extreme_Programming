@@ -37,22 +37,23 @@ public class Maestro {
     private String correo;
     
     @OneToMany(mappedBy = "maestro", cascade = CascadeType.ALL)
-    private List<Curso> cursos;
+    private List<Grupo> grupos;
 
     public Maestro() {}
 
-    public Maestro(Long id, String nombre, String contraseña, String correo) {
-        this.id = id;
-        this.nombre = nombre;
-        this.contraseña = contraseña;
-        this.correo = correo;
-        this.cursos = new ArrayList<>();
-    }
-    
     public Maestro(String nombre, String contraseña, String correo) {
         this.nombre = nombre;
         this.contraseña = contraseña;
         this.correo = correo;
+        this.grupos = new ArrayList<>();
+    }
+
+    public Maestro(Long id, String nombre, String contraseña, String correo, List<Grupo> grupos) {
+        this.id = id;
+        this.nombre = nombre;
+        this.contraseña = contraseña;
+        this.correo = correo;
+        this.grupos = grupos;
     }
 
     public Long getId() {
@@ -63,14 +64,6 @@ public class Maestro {
         this.id = id;
     }
 
-    public List<Curso> getCursos() {
-        return cursos;
-    }
-
-    public void setCursos(List<Curso> cursos) {
-        this.cursos = cursos;
-    }
-    
     public String getNombre() {
         return nombre;
     }
@@ -95,18 +88,21 @@ public class Maestro {
         this.correo = correo;
     }
 
-    @Override
-    public String toString() {
-        return "Maestro{" + "id=" + id + ", nombre=" + nombre + ", correo=" + correo + '}';
+    public List<Grupo> getGrupos() {
+        return grupos;
+    }
+
+    public void setGrupos(List<Grupo> grupos) {
+        this.grupos = grupos;
     }
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 13 * hash + Objects.hashCode(this.id);
-        hash = 13 * hash + Objects.hashCode(this.nombre);
-        hash = 13 * hash + Objects.hashCode(this.contraseña);
-        hash = 13 * hash + Objects.hashCode(this.correo);
+        int hash = 5;
+        hash = 29 * hash + Objects.hashCode(this.id);
+        hash = 29 * hash + Objects.hashCode(this.nombre);
+        hash = 29 * hash + Objects.hashCode(this.contraseña);
+        hash = 29 * hash + Objects.hashCode(this.correo);
         return hash;
     }
 
@@ -136,6 +132,8 @@ public class Maestro {
         }
         return true;
     }
+
+    
     
     
     
