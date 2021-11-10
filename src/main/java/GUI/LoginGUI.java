@@ -44,7 +44,6 @@ public class LoginGUI extends BaseGUI {
         iniciarSesiónLbl.setText("ASSISTANCER");
 
         btnIngresar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        btnIngresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8-logo-de-google-48.png"))); // NOI18N
         btnIngresar.setText("Iniciar sesión");
         btnIngresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

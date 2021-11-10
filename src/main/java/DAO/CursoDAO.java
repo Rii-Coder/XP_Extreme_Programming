@@ -78,10 +78,10 @@ public class CursoDAO extends BaseDAO<Curso>{
         
         List<Curso> cursos;
          if (!nombre.equals("")) {
-            String jpql = String.format("SELECT * FROM xp.curso WHERE xp.curso.nombre = '%s';", nombre);
+            String jpql = String.format("SELECT * FROM dTKxX176tm.Curso WHERE dTKxX176tm.Curso.nombre = '%s';", nombre);
             cursos = entityManager.createNativeQuery(jpql, Curso.class).getResultList();
         } else {
-            String jpql = "SELECT * FROM xp.curso;";
+            String jpql = "SELECT * FROM dTKxX176tm.Curso;";
             cursos = entityManager.createNativeQuery(jpql, Curso.class).getResultList();
         }
         entityManager.getTransaction().commit();
