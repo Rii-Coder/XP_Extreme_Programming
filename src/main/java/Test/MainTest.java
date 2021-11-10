@@ -20,7 +20,7 @@ public class MainTest {
         long id1 = 1;
         
         MaestroDAO maestros = new MaestroDAO();
-        maestros.agregar(new Maestro(id1, "pepe", "1234", "correo@gmail.com"));
+      //  maestros.agregar(new Maestro(id1, "pepe", "1234", "correo@gmail.com"));
         CursoDAO cursos = new CursoDAO();
         cursos.agregar(new Curso());
     }
