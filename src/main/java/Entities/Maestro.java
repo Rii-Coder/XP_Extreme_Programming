@@ -1,6 +1,8 @@
 
 package Entities;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -12,6 +14,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import org.apache.commons.codec.digest.MessageDigestAlgorithms;
+import org.codehaus.plexus.util.Base64;
 
 /**
  *
@@ -39,7 +43,13 @@ public class Maestro {
     @OneToMany(mappedBy = "maestro", cascade = CascadeType.ALL)
     private List<Grupo> grupos;
 
-    public Maestro() {}
+    public Maestro() {
+    }
+
+    public Maestro(String correo, String contraseña) throws NoSuchAlgorithmException {
+        this.correo = correo;
+        this.contraseña = cifrarSHA(contraseña);
+    }
 
     public Maestro(String nombre, String contraseña, String correo) {
         this.nombre = nombre;
@@ -133,8 +143,21 @@ public class Maestro {
         return true;
     }
 
-    
-    
-    
-    
+    public String cifrarSHA(String textoACifrar) throws NoSuchAlgorithmException {
+        MessageDigest md = MessageDigest.getInstance(MessageDigestAlgorithms.SHA3_384);
+        md.update(textoACifrar.getBytes());
+        byte[] digest = md.digest();
+        // Se escribe codificado base 64. Se necesita la librería
+        // commons-codec-x.x.x.jar de Apache
+        byte[] encoded = Base64.encodeBase64(digest);
+
+        return new String(encoded);
+    }
+
+    @Override
+    public String toString() {
+        return "Maestro{" + "id=" + id + ", nombre=" + nombre + ", contrase\u00f1a=" + contraseña + ", correo=" + correo + '}';
+    }
+
+
 }

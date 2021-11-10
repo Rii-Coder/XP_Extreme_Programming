@@ -5,17 +5,28 @@
  */
 package GUI;
 
+import Entities.Maestro;
+import java.security.NoSuchAlgorithmException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import DAO.MaestroDAO;
+import javax.persistence.NoResultException;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author R2
  */
 public class LoginGUI extends BaseGUI {
 
+    private MaestroDAO maestroDAO;
+    
     /**
      * Creates new form LoginGUI
      */
     public LoginGUI() {
         initComponents();
+        maestroDAO = new MaestroDAO();
         centrarPantalla();
     }
 
@@ -33,7 +44,7 @@ public class LoginGUI extends BaseGUI {
         btnIngresar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        txtUsuario = new javax.swing.JTextField();
+        txtCorreo = new javax.swing.JTextField();
         txtContraseña = new javax.swing.JPasswordField();
         jLabel3 = new javax.swing.JLabel();
         btnRegistrarme = new javax.swing.JButton();
@@ -52,7 +63,7 @@ public class LoginGUI extends BaseGUI {
         });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel1.setText("Usuario:");
+        jLabel1.setText("Correo electrónico:");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel2.setText("Contraseña:");
@@ -77,7 +88,7 @@ public class LoginGUI extends BaseGUI {
                 .addGap(41, 41, 41)
                 .addGroup(PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtContraseña)
-                    .addComponent(txtUsuario)
+                    .addComponent(txtCorreo)
                     .addGroup(PanelPrincipalLayout.createSequentialGroup()
                         .addGroup(PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(PanelPrincipalLayout.createSequentialGroup()
@@ -95,7 +106,7 @@ public class LoginGUI extends BaseGUI {
                 .addGap(25, 25, 25)
                 .addGroup(PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(83, 83, 83)
                 .addGroup(PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -124,7 +135,25 @@ public class LoginGUI extends BaseGUI {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
-        // TODO add your handling code here:
+        Maestro maestro = null; // Iniciamos un maestro auxiliar
+        try {
+            // Utilizamos el constructor especial que cifra la contraseña en automático
+            maestro = new Maestro(txtCorreo.getText(), String.valueOf(txtContraseña.getPassword()));
+        } catch (NoSuchAlgorithmException ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        try {
+            //Iniciamos sesión, este método nos regresa un maestro.
+            System.out.println(maestroDAO.iniciarSesion(maestro));
+            //TE VA A MOSTRAR UN MONTÓN DE COSAS, TU IGNORA Y ESPERA EL RESULTADO FINAL. ES POR EL HOSTING
+
+        } catch (NoResultException x) {
+            //Si no se encuentra ninguno, se lanza el Dialog.
+            JOptionPane.showMessageDialog(null, "Las credenciales son incorrectas. Por favor reintente");
+        }
+
+
     }//GEN-LAST:event_btnIngresarActionPerformed
 
     /**
@@ -171,6 +200,6 @@ public class LoginGUI extends BaseGUI {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPasswordField txtContraseña;
-    private javax.swing.JTextField txtUsuario;
+    private javax.swing.JTextField txtCorreo;
     // End of variables declaration//GEN-END:variables
 }

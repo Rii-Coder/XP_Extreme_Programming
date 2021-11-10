@@ -6,11 +6,18 @@
 package DAO;
 
 import Entities.Maestro;
+import com.sun.org.apache.xml.internal.security.algorithms.MessageDigestAlgorithm;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaQuery;
+import java.security.MessageDigest;
+import java.security.MessageDigestSpi;
+import java.security.NoSuchAlgorithmException;
+import org.apache.commons.codec.digest.MessageDigestAlgorithms;
+import org.codehaus.plexus.util.Base64;
+
 
 /**
  *
@@ -71,6 +78,28 @@ public class MaestroDAO extends BaseDAO<Maestro>{
         List<Maestro> maestro = query.getResultList();
         entityManager.getTransaction().commit();
         return new ArrayList<>(maestro);
+    }
+    
+    public Maestro iniciarSesion(Maestro maestro) {
+
+        if(maestro != null){
+        EntityManager entityManager = this.createEntityManager();
+        entityManager.getTransaction().begin();
+
+        
+        if (!maestro.getCorreo().equals("") && !maestro.getContraseña().equals("")) {
+            String jpql = String.format("SELECT * FROM dTKxX176tm.Maestro WHERE dTKxX176tm.Maestro.CorreoElectronico = '%s' AND dTKxX176tm.Maestro.Contraseña = '%s';",
+                    maestro.getCorreo(), maestro.getContraseña());
+            maestro = (Maestro) entityManager.createNativeQuery(jpql, Maestro.class).getSingleResult();
+        }
+        try{
+        entityManager.getTransaction().commit();
+        } catch (Exception x){
+            System.out.println("Ningun maestro encontrado");
+        }
+        return maestro;
+    }
+            return null;   
     }
     
 }
