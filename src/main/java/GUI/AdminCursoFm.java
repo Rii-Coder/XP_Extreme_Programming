@@ -197,7 +197,7 @@ public class AdminCursoFm extends BaseGUI {
         int unidades = (Integer) spnUnidades.getValue();
         seleccionado.setUnidades(unidades);
         if (txtNombreCurso.getText().equalsIgnoreCase("")) {
-             JOptionPane.showMessageDialog(null, "Verifique que el nombre del curso no esté vacío")
+             JOptionPane.showMessageDialog(null, "Verifique que el nombre del curso no esté vacío");
         }else{
            cursoR.actualizar(seleccionado);
         cargarCursos(); 
@@ -208,7 +208,7 @@ public class AdminCursoFm extends BaseGUI {
     private void btnAgregarCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarCursoActionPerformed
         int unidades = (Integer) spnUnidades.getValue();
         if (txtNombreCurso.getText().equalsIgnoreCase("")) {
-             JOptionPane.showMessageDialog(null, "Verifique que el nombre del curso no esté vacío")
+             JOptionPane.showMessageDialog(null, "Verifique que el nombre del curso no esté vacío");
         }else{
         cursoR.agregar(new Curso(txtNombreCurso.getText(), unidades));
         cargarCursos();
@@ -246,7 +246,6 @@ public class AdminCursoFm extends BaseGUI {
 
     private void cargarCursos() {
         List<Curso> cursos = this.cursoR.consultarCursos(txtBuscar.getText());
-        System.out.println(cursos);
         if (cursos != null) {
             DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
             modelo.setRowCount(0);
