@@ -29,6 +29,14 @@ public class LoginGUI extends BaseGUI {
         maestroDAO = new MaestroDAO();
         centrarPantalla();
     }
+    
+    public LoginGUI(Maestro maestro) {
+        initComponents();
+        maestroDAO = new MaestroDAO();
+        txtCorreo.setText(maestro.getCorreo());
+        JOptionPane.showMessageDialog(null, "Felicidades se registro su usuario correctamente. Ingrese la contraseña para ingresar.");
+        centrarPantalla();
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -50,6 +58,7 @@ public class LoginGUI extends BaseGUI {
         btnRegistrarme = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Login");
 
         iniciarSesiónLbl.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
         iniciarSesiónLbl.setText("ASSISTANCER");
@@ -71,15 +80,16 @@ public class LoginGUI extends BaseGUI {
         jLabel3.setText("¿No tienes una cuenta?");
 
         btnRegistrarme.setText("Registrarme");
+        btnRegistrarme.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistrarmeActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout PanelPrincipalLayout = new javax.swing.GroupLayout(PanelPrincipal);
         PanelPrincipal.setLayout(PanelPrincipalLayout);
         PanelPrincipalLayout.setHorizontalGroup(
             PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelPrincipalLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnIngresar)
-                .addGap(467, 467, 467))
             .addGroup(PanelPrincipalLayout.createSequentialGroup()
                 .addGap(342, 342, 342)
                 .addGroup(PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -90,14 +100,18 @@ public class LoginGUI extends BaseGUI {
                     .addComponent(txtContraseña)
                     .addComponent(txtCorreo)
                     .addGroup(PanelPrincipalLayout.createSequentialGroup()
-                        .addGroup(PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(PanelPrincipalLayout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addGap(82, 82, 82)
-                                .addComponent(btnRegistrarme, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(iniciarSesiónLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(iniciarSesiónLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 19, Short.MAX_VALUE)))
                 .addGap(395, 395, 395))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelPrincipalLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(PanelPrincipalLayout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnRegistrarme, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnIngresar, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(444, 444, 444))
         );
         PanelPrincipalLayout.setVerticalGroup(
             PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -111,13 +125,13 @@ public class LoginGUI extends BaseGUI {
                 .addGroup(PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(55, 55, 55)
                 .addComponent(btnIngresar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(35, 35, 35)
                 .addGroup(PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnRegistrarme))
-                .addContainerGap(407, Short.MAX_VALUE))
+                .addContainerGap(353, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -145,7 +159,12 @@ public class LoginGUI extends BaseGUI {
 
         try {
             //Iniciamos sesión, este método nos regresa un maestro.
-            System.out.println(maestroDAO.iniciarSesion(maestro));
+            Maestro maestroChido = maestroDAO.iniciarSesion(maestro);
+            if (maestroChido != null || !maestroChido.getNombre().equals("")) {
+                System.out.println("Bienvenido "+ maestroChido);
+                this.dispose();
+                new AdminCursoFm(maestroChido).setVisible(true);
+            }
             //TE VA A MOSTRAR UN MONTÓN DE COSAS, TU IGNORA Y ESPERA EL RESULTADO FINAL. ES POR EL HOSTING
 
         } catch (NoResultException x) {
@@ -155,6 +174,11 @@ public class LoginGUI extends BaseGUI {
 
 
     }//GEN-LAST:event_btnIngresarActionPerformed
+
+    private void btnRegistrarmeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarmeActionPerformed
+        this.dispose();
+        new RegistrarseGUI().setVisible(true);
+    }//GEN-LAST:event_btnRegistrarmeActionPerformed
 
     /**
      * @param args the command line arguments

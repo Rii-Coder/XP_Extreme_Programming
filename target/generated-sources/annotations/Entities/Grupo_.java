@@ -6,7 +6,7 @@ import javax.annotation.Generated;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
-@Generated(value="EclipseLink-2.7.7.v20200504-rNA", date="2021-11-10T15:32:40")
+@Generated(value="EclipseLink-2.7.7.v20200504-rNA", date="2021-11-10T18:17:10")
 @StaticMetamodel(Grupo.class)
 public class Grupo_ { 
 

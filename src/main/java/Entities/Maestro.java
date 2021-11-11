@@ -51,9 +51,9 @@ public class Maestro {
         this.contraseña = cifrarSHA(contraseña);
     }
 
-    public Maestro(String nombre, String contraseña, String correo) {
+    public Maestro(String nombre, String contraseña, String correo) throws NoSuchAlgorithmException {
         this.nombre = nombre;
-        this.contraseña = contraseña;
+        this.contraseña = cifrarSHA(contraseña);
         this.correo = correo;
         this.grupos = new ArrayList<>();
     }
@@ -144,7 +144,7 @@ public class Maestro {
     }
 
     public String cifrarSHA(String textoACifrar) throws NoSuchAlgorithmException {
-        MessageDigest md = MessageDigest.getInstance(MessageDigestAlgorithms.SHA3_384);
+        MessageDigest md = MessageDigest.getInstance(MessageDigestAlgorithms.SHA_384);
         md.update(textoACifrar.getBytes());
         byte[] digest = md.digest();
         // Se escribe codificado base 64. Se necesita la librería

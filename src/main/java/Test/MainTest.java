@@ -17,11 +17,14 @@ import Entities.Maestro;
 public class MainTest {
     public static void main(String[] args) {
         
-        long id1 = 1;
         
         MaestroDAO maestros = new MaestroDAO();
-      //  maestros.agregar(new Maestro(id1, "pepe", "1234", "correo@gmail.com"));
-        CursoDAO cursos = new CursoDAO();
-        cursos.agregar(new Curso());
+        try {
+            maestros.agregar(new Maestro("pepe", "123456", "pepe@gmail.com"));
+        } catch (Exception e) {
+        }
+        
+        //CursoDAO cursos = new CursoDAO();
+        //cursos.agregar(new Curso());
     }
 }
