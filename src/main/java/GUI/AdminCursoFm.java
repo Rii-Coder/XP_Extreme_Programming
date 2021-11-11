@@ -9,6 +9,7 @@ import DAO.CursoDAO;
 import Entities.Curso;
 import Entities.Maestro;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -70,6 +71,8 @@ public class AdminCursoFm extends BaseGUI {
 
         jLabel4.setText("Unidades");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 80, 80, -1));
+
+        spnUnidades.setModel(new javax.swing.SpinnerNumberModel(0, 0, 10, 1));
         getContentPane().add(spnUnidades, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 110, -1, -1));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Cursos existentes"));
@@ -193,14 +196,23 @@ public class AdminCursoFm extends BaseGUI {
         seleccionado.setNombre(txtNombreCurso.getText());
         int unidades = (Integer) spnUnidades.getValue();
         seleccionado.setUnidades(unidades);
-        cursoR.actualizar(seleccionado);
-        cargarCursos();
+        if (txtNombreCurso.getText().equalsIgnoreCase("")) {
+             JOptionPane.showMessageDialog(null, "Verifique que el nombre del curso no esté vacío")
+        }else{
+           cursoR.actualizar(seleccionado);
+        cargarCursos(); 
+        }
+        
     }//GEN-LAST:event_btnEditarCursoActionPerformed
 
     private void btnAgregarCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarCursoActionPerformed
         int unidades = (Integer) spnUnidades.getValue();
+        if (txtNombreCurso.getText().equalsIgnoreCase("")) {
+             JOptionPane.showMessageDialog(null, "Verifique que el nombre del curso no esté vacío")
+        }else{
         cursoR.agregar(new Curso(txtNombreCurso.getText(), unidades));
         cargarCursos();
+        }
     }//GEN-LAST:event_btnAgregarCursoActionPerformed
 
     private void btnConsultarAsistenciasNavegarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarAsistenciasNavegarActionPerformed
