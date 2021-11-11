@@ -37,9 +37,10 @@ public class Grupo {
     @JoinColumn(name = "idCurso")
     private Curso curso;
     
-    @OneToMany(mappedBy = "grupo", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "Grupo", cascade = CascadeType.ALL)
     private List<Alumno> alumnos;
     
+    @Column(name = "Nombre")
     private String nombre;
     
     public Grupo() {
