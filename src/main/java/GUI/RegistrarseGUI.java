@@ -6,8 +6,6 @@ package GUI;
 
 import DAO.MaestroDAO;
 import Entities.Maestro;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 
 /**
@@ -150,7 +148,8 @@ public class RegistrarseGUI extends BaseGUI {
         MaestroDAO maestros = new MaestroDAO();
         
         //Expresión regular para validad correo
-        Pattern pattern = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+        Pattern pattern = Pattern
+                .compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
                         + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
         String correo = txtCorreoElectronico.getText();
         
@@ -176,7 +175,7 @@ public class RegistrarseGUI extends BaseGUI {
                     JOptionPane.showMessageDialog(null, "Las contraseñas no coinciden.");
                 }
             } else {
-                JOptionPane.showMessageDialog(null, "El correo registrado no es valido.");
+                JOptionPane.showMessageDialog(null, "El correo registrado no es valido.")
             }
 
 
