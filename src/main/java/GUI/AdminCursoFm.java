@@ -67,17 +67,6 @@ public class AdminCursoFm extends BaseGUI {
 
         jLabel2.setText("Nombre curso");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 20, -1, -1));
-
-        txtNombreCurso.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNombreCursoActionPerformed(evt);
-            }
-        });
-        txtNombreCurso.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtNombreCursoKeyTyped(evt);
-            }
-        });
         getContentPane().add(txtNombreCurso, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 50, 150, -1));
 
         jLabel4.setText("Unidades");
@@ -131,11 +120,6 @@ public class AdminCursoFm extends BaseGUI {
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 180, 730, 420));
 
         jButton2.setText("Buscar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
         getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 130, 90, -1));
 
         btnEliminarCurso.setText("Eliminar");
@@ -203,11 +187,6 @@ public class AdminCursoFm extends BaseGUI {
                 txtBuscarActionPerformed(evt);
             }
         });
-        txtBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtBuscarKeyTyped(evt);
-            }
-        });
         getContentPane().add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 130, 400, -1));
 
         pack();
@@ -218,7 +197,7 @@ public class AdminCursoFm extends BaseGUI {
         int unidades = (Integer) spnUnidades.getValue();
         seleccionado.setUnidades(unidades);
         if (txtNombreCurso.getText().equalsIgnoreCase("")) {
-             JOptionPane.showMessageDialog(null, "Verifique que el nombre del curso no esté vacío")
+             JOptionPane.showMessageDialog(null, "Verifique que el nombre del curso no esté vacío");
         }else{
            cursoR.actualizar(seleccionado);
         cargarCursos(); 
@@ -229,7 +208,7 @@ public class AdminCursoFm extends BaseGUI {
     private void btnAgregarCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarCursoActionPerformed
         int unidades = (Integer) spnUnidades.getValue();
         if (txtNombreCurso.getText().equalsIgnoreCase("")) {
-             JOptionPane.showMessageDialog(null, "Verifique que el nombre del curso no esté vacío")
+             JOptionPane.showMessageDialog(null, "Verifique que el nombre del curso no esté vacío");
         }else{
         cursoR.agregar(new Curso(txtNombreCurso.getText(), unidades));
         cargarCursos();
@@ -265,31 +244,8 @@ public class AdminCursoFm extends BaseGUI {
         spnUnidades.setValue(curso.getUnidades());
     }//GEN-LAST:event_jTable1MouseClicked
 
-    private void txtNombreCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreCursoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNombreCursoActionPerformed
-
-    private void txtNombreCursoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreCursoKeyTyped
-        // TODO add your handling code here:
-         if (txtNombreCurso.getText().length() >= 256) {
-            evt.consume();
-        }
-    }//GEN-LAST:event_txtNombreCursoKeyTyped
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void txtBuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyTyped
-        // TODO add your handling code here:
-         if (txtBuscar.getText().length() >= 256) {
-            evt.consume();
-        }
-    }//GEN-LAST:event_txtBuscarKeyTyped
-
     private void cargarCursos() {
         List<Curso> cursos = this.cursoR.consultarCursos(txtBuscar.getText());
-        System.out.println(cursos);
         if (cursos != null) {
             DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
             modelo.setRowCount(0);
