@@ -50,7 +50,6 @@ public class AdminCursoFm extends BaseGUI {
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jButton2 = new javax.swing.JButton();
         btnEliminarCurso = new javax.swing.JButton();
         btnEditarCurso = new javax.swing.JButton();
         btnAgregarCurso = new javax.swing.JButton();
@@ -60,6 +59,7 @@ public class AdminCursoFm extends BaseGUI {
         btnAdminGruposNavegar = new javax.swing.JButton();
         btnImportAsistenciasNavegar = new javax.swing.JButton();
         txtBuscar = new javax.swing.JTextField();
+        LogOut = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Administrar cursos");
@@ -72,7 +72,7 @@ public class AdminCursoFm extends BaseGUI {
         jLabel4.setText("Unidades");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 80, 80, -1));
 
-        spnUnidades.setModel(new javax.swing.SpinnerNumberModel(0, 0, 10, 1));
+        spnUnidades.setModel(new javax.swing.SpinnerNumberModel(1, 1, 10, 1));
         getContentPane().add(spnUnidades, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 110, -1, -1));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Cursos existentes"));
@@ -113,17 +113,14 @@ public class AdminCursoFm extends BaseGUI {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 376, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 375, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 180, 730, 420));
 
-        jButton2.setText("Buscar");
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 130, 90, -1));
-
         btnEliminarCurso.setText("Eliminar");
-        getContentPane().add(btnEliminarCurso, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 20, 150, 80));
+        getContentPane().add(btnEliminarCurso, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 20, 150, 80));
 
         btnEditarCurso.setText("Editar");
         btnEditarCurso.addActionListener(new java.awt.event.ActionListener() {
@@ -131,7 +128,7 @@ public class AdminCursoFm extends BaseGUI {
                 btnEditarCursoActionPerformed(evt);
             }
         });
-        getContentPane().add(btnEditarCurso, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 20, 150, 80));
+        getContentPane().add(btnEditarCurso, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 20, 150, 80));
 
         btnAgregarCurso.setText("Agregar");
         btnAgregarCurso.addActionListener(new java.awt.event.ActionListener() {
@@ -180,14 +177,27 @@ public class AdminCursoFm extends BaseGUI {
         });
         jPanel2.add(btnImportAsistenciasNavegar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, 170, 90));
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 190, 590));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 190, 470));
 
         txtBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtBuscarActionPerformed(evt);
             }
         });
-        getContentPane().add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 130, 400, -1));
+        txtBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtBuscarKeyTyped(evt);
+            }
+        });
+        getContentPane().add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 130, 500, -1));
+
+        LogOut.setText("Cerrar sesión");
+        LogOut.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LogOutActionPerformed(evt);
+            }
+        });
+        getContentPane().add(LogOut, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 160, 40));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -210,7 +220,7 @@ public class AdminCursoFm extends BaseGUI {
         if (txtNombreCurso.getText().equalsIgnoreCase("")) {
              JOptionPane.showMessageDialog(null, "Verifique que el nombre del curso no esté vacío");
         }else{
-        cursoR.agregar(new Curso(txtNombreCurso.getText(), unidades));
+        cursoR.agregar(new Curso(txtNombreCurso.getText(), unidades,usuario));
         cargarCursos();
         }
     }//GEN-LAST:event_btnAgregarCursoActionPerformed
@@ -244,8 +254,17 @@ public class AdminCursoFm extends BaseGUI {
         spnUnidades.setValue(curso.getUnidades());
     }//GEN-LAST:event_jTable1MouseClicked
 
+    private void LogOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogOutActionPerformed
+        this.dispose();
+        new LoginGUI().setVisible(true);
+    }//GEN-LAST:event_LogOutActionPerformed
+
+    private void txtBuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyTyped
+        cargarCursos();
+    }//GEN-LAST:event_txtBuscarKeyTyped
+
     private void cargarCursos() {
-        List<Curso> cursos = this.cursoR.consultarCursos(txtBuscar.getText());
+        List<Curso> cursos = this.cursoR.consultarCursos(txtBuscar.getText(), usuario.getId());
         if (cursos != null) {
             DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
             modelo.setRowCount(0);
@@ -257,6 +276,7 @@ public class AdminCursoFm extends BaseGUI {
    
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton LogOut;
     private javax.swing.JButton btnAdminCursosNavegar;
     private javax.swing.JButton btnAdminGruposNavegar;
     private javax.swing.JButton btnAgregarCurso;
@@ -264,7 +284,6 @@ public class AdminCursoFm extends BaseGUI {
     private javax.swing.JButton btnEditarCurso;
     private javax.swing.JButton btnEliminarCurso;
     private javax.swing.JButton btnImportAsistenciasNavegar;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;

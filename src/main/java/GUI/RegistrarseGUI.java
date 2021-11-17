@@ -148,39 +148,43 @@ public class RegistrarseGUI extends BaseGUI {
 
     private void btnRegistrarmeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarmeActionPerformed
         MaestroDAO maestros = new MaestroDAO();
-        
-        //Expresión regular para validad correo
-        Pattern pattern = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
-                        + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
-        String correo = txtCorreoElectronico.getText();
-        
-        Matcher mather = pattern.matcher(correo);
-        
-        //Validaciones y metodo para registrar un usuario.
-        if (txtNombre.getText().equalsIgnoreCase("") && txtCorreoElectronico.getText().equalsIgnoreCase("") && txtConfirmarContraseña.getText().equalsIgnoreCase("") && txtContraseña.getText().equalsIgnoreCase("")) {
-            JOptionPane.showMessageDialog(null, "Por favor llene todos los campos para poder registrarse correctamente");
-        } else {
-            //Valida el correo mediante la expresión regular
-            if (mather.find() == true) {
-                //Si el correo es valido ahora se validará que las contraseñas coincidan.
-                if (txtContraseña.getText().equalsIgnoreCase(txtConfirmarContraseña.getText())) {
-                    try {
-                        Maestro maestro = new Maestro(txtNombre.getText(), String.valueOf(txtContraseña.getPassword()), txtCorreoElectronico.getText());
-                        maestros.agregar(maestro);
-                        this.dispose();
-                        new LoginGUI(maestro).setVisible(true);
-                    } catch (Exception e) {
-                        JOptionPane.showMessageDialog(null, "Error al intentar registrar al maestro");
+
+        if (!maestros.isMaestroRegistrado(txtCorreoElectronico.getText())) {
+            //Expresión regular para validad correo
+            Pattern pattern = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+                    + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+            String correo = txtCorreoElectronico.getText();
+
+            Matcher mather = pattern.matcher(correo);
+
+            //Validaciones y metodo para registrar un usuario.
+            if (txtNombre.getText().equalsIgnoreCase("") && txtCorreoElectronico.getText().equalsIgnoreCase("") && txtConfirmarContraseña.getText().equalsIgnoreCase("") && txtContraseña.getText().equalsIgnoreCase("")) {
+                JOptionPane.showMessageDialog(null, "Por favor llene todos los campos para poder registrarse correctamente");
+            } else {
+                //Valida el correo mediante la expresión regular
+                if (mather.find() == true) {
+                    //Si el correo es valido ahora se validará que las contraseñas coincidan.
+                    if (txtContraseña.getText().equalsIgnoreCase(txtConfirmarContraseña.getText())) {
+                        try {
+                            Maestro maestro = new Maestro(txtNombre.getText(), String.valueOf(txtContraseña.getPassword()), txtCorreoElectronico.getText());
+                            maestros.agregar(maestro);
+                            this.dispose();
+                            new LoginGUI(maestro).setVisible(true);
+                        } catch (Exception e) {
+                            JOptionPane.showMessageDialog(null, "Error al intentar registrar al maestro");
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Las contraseñas no coinciden.");
                     }
                 } else {
-                    JOptionPane.showMessageDialog(null, "Las contraseñas no coinciden.");
+                    JOptionPane.showMessageDialog(null, "El correo registrado no es valido.");
                 }
-            } else {
-                JOptionPane.showMessageDialog(null, "El correo registrado no es valido.");
+
             }
-
-
+        }else{
+            JOptionPane.showMessageDialog(null, "El correo ingresado ya esta registrado en el sistema. Intente iniciar sesión");
         }
+
     }//GEN-LAST:event_btnRegistrarmeActionPerformed
 
     private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped

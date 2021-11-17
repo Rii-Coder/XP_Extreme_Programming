@@ -18,12 +18,11 @@ import java.security.NoSuchAlgorithmException;
 import org.apache.commons.codec.digest.MessageDigestAlgorithms;
 import org.codehaus.plexus.util.Base64;
 
-
 /**
  *
  * @author R2
  */
-public class MaestroDAO extends BaseDAO<Maestro>{
+public class MaestroDAO extends BaseDAO<Maestro> {
 
     @Override
     public void agregar(Maestro entidad) {
@@ -53,7 +52,7 @@ public class MaestroDAO extends BaseDAO<Maestro>{
             maestro.setCorreo(entidad.getCorreo());
             maestro.setNombre(entidad.getNombre());
             maestro.setContraseña(entidad.getContraseña());
-            maestro.setGrupos(entidad.getGrupos());
+            maestro.setCurso(entidad.getCurso());
             entityManager.merge(maestro);
         }
         entityManager.getTransaction().commit();
@@ -79,27 +78,50 @@ public class MaestroDAO extends BaseDAO<Maestro>{
         entityManager.getTransaction().commit();
         return new ArrayList<>(maestro);
     }
-    
+
     public Maestro iniciarSesion(Maestro maestro) {
 
-        if(maestro != null){
-        EntityManager entityManager = this.createEntityManager();
-        entityManager.getTransaction().begin();
+        if (maestro != null) {
+            EntityManager entityManager = this.createEntityManager();
+            entityManager.getTransaction().begin();
 
-        
-        if (!maestro.getCorreo().equals("") && !maestro.getContraseña().equals("")) {
-            String jpql = String.format("SELECT * FROM dTKxX176tm.Maestro WHERE dTKxX176tm.Maestro.CorreoElectronico = '%s' AND dTKxX176tm.Maestro.Contraseña = '%s';",
-                    maestro.getCorreo(), maestro.getContraseña());
-            maestro = (Maestro) entityManager.createNativeQuery(jpql, Maestro.class).getSingleResult();
+            if (!maestro.getCorreo().equals("") && !maestro.getContraseña().equals("")) {
+                String jpql = String.format("SELECT * FROM dTKxX176tm.Maestro WHERE dTKxX176tm.Maestro.CorreoElectronico = '%s' AND dTKxX176tm.Maestro.Contraseña = '%s';",
+                        maestro.getCorreo(), maestro.getContraseña());
+                maestro = (Maestro) entityManager.createNativeQuery(jpql, Maestro.class).getSingleResult();
+            }
+            try {
+                entityManager.getTransaction().commit();
+            } catch (Exception x) {
+                System.out.println("Ningun maestro encontrado");
+            }
+            return maestro;
         }
-        try{
-        entityManager.getTransaction().commit();
-        } catch (Exception x){
-            System.out.println("Ningun maestro encontrado");
+        return null;
+    }
+
+    public boolean isMaestroRegistrado(String correo) {
+
+        if (correo != "") {
+            EntityManager entityManager = this.createEntityManager();
+            entityManager.getTransaction().begin();
+
+            String jpql = String.format("SELECT * FROM dTKxX176tm.Maestro WHERE dTKxX176tm.Maestro.CorreoElectronico = '%s';",
+                    correo);
+            List lista = entityManager.createNativeQuery(jpql, Maestro.class).getResultList();
+
+            try {
+                entityManager.getTransaction().commit();
+            } catch (Exception x) {
+                System.out.println("Ningun maestro encontrado");
+            }
+            if(lista.isEmpty()){
+                return false;
+            }else{
+                return true;
+            }
         }
-        return maestro;
+        return false;
     }
-            return null;   
-    }
-    
+
 }

@@ -41,7 +41,7 @@ public class Maestro {
     private String correo;
     
     @OneToMany(mappedBy = "maestro", cascade = CascadeType.ALL)
-    private List<Grupo> grupos;
+    private List<Curso> curso;
 
     public Maestro() {
     }
@@ -55,15 +55,15 @@ public class Maestro {
         this.nombre = nombre;
         this.contraseña = cifrarSHA(contraseña);
         this.correo = correo;
-        this.grupos = new ArrayList<>();
+        this.curso = new ArrayList<>();
     }
 
-    public Maestro(Long id, String nombre, String contraseña, String correo, List<Grupo> grupos) {
+    public Maestro(Long id, String nombre, String contraseña, String correo, List<Curso> curso) {
         this.id = id;
         this.nombre = nombre;
         this.contraseña = contraseña;
         this.correo = correo;
-        this.grupos = grupos;
+        this.curso = curso;
     }
 
     public Long getId() {
@@ -98,13 +98,14 @@ public class Maestro {
         this.correo = correo;
     }
 
-    public List<Grupo> getGrupos() {
-        return grupos;
+    public List<Curso> getCurso() {
+        return curso;
     }
 
-    public void setGrupos(List<Grupo> grupos) {
-        this.grupos = grupos;
+    public void setCurso(List<Curso> curso) {
+        this.curso = curso;
     }
+
 
     @Override
     public int hashCode() {

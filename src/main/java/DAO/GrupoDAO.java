@@ -45,7 +45,6 @@ public class GrupoDAO extends BaseDAO<Grupo>{
         if (grupo != null) {
             grupo.setNombre(entidad.getNombre());
             grupo.setCurso(entidad.getCurso());
-            grupo.setMaestro(entidad.getMaestro());
             grupo.setAlumnos(entidad.getAlumnos());
             //Set fecha grupo.set
             entityManager.merge(grupo);

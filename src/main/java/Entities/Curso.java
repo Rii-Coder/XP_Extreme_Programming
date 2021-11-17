@@ -38,22 +38,28 @@ public class Curso {
     @OneToMany(mappedBy = "curso", cascade = CascadeType.ALL)
     private List<Grupo> grupos; //provisional
     
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "idMaestro")
+    private Maestro maestro;
+    
     @Column(name = "unidades", nullable = false)
     private int unidades;
 
     public Curso(){}
 
-    public Curso(String nombre, int unidades) {
+    public Curso(String nombre, int unidades, Maestro maestro) {
         this.nombre = nombre;
         this.unidades = unidades;
         this.grupos = new ArrayList<>();
+        this.maestro = maestro;
     }
 
-    public Curso(Long id, String nombre, List<Grupo> grupos, int unidades) {
+    public Curso(Long id, String nombre, List<Grupo> grupos, int unidades, Maestro maestro) {
         this.id = id;
         this.nombre = nombre;
         this.grupos = grupos;
         this.unidades = unidades;
+        this.maestro = maestro;
     }
 
     public Long getId() {
@@ -88,17 +94,26 @@ public class Curso {
         this.unidades = unidades;
     }
 
+    public Maestro getMaestro() {
+        return maestro;
+    }
+
+    public void setMaestro(Maestro maestro) {
+        this.maestro = maestro;
+    }
+
     @Override
     public String toString() {
-        return "Curso{" + "id=" + id + ", nombre=" + nombre + ", unidades=" + unidades + '}';
+        return "Curso{" + "id=" + id + ", nombre=" + nombre + ", maestro=" + maestro + ", unidades=" + unidades + '}';
     }
     
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 23 * hash + Objects.hashCode(this.id);
-        hash = 23 * hash + Objects.hashCode(this.nombre);
-        hash = 23 * hash + this.unidades;
+        int hash = 3;
+        hash = 83 * hash + Objects.hashCode(this.id);
+        hash = 83 * hash + Objects.hashCode(this.nombre);
+        hash = 83 * hash + Objects.hashCode(this.maestro);
+        hash = 83 * hash + this.unidades;
         return hash;
     }
 
@@ -123,8 +138,13 @@ public class Curso {
         if (!Objects.equals(this.id, other.id)) {
             return false;
         }
+        if (!Objects.equals(this.maestro, other.maestro)) {
+            return false;
+        }
         return true;
     }
+    
+    
     
     public Object[] toArray() {
         return new Object[]{

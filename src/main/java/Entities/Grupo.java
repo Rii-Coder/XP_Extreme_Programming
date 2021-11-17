@@ -30,10 +30,6 @@ public class Grupo {
     private Long id;
     
     @ManyToOne(optional = false)
-    @JoinColumn(name = "idMaestro")
-    private Maestro maestro;
-    
-    @ManyToOne(optional = false)
     @JoinColumn(name = "idCurso")
     private Curso curso;
     
@@ -46,17 +42,15 @@ public class Grupo {
     public Grupo() {
     }
 
-    public Grupo(Long id, Maestro maestro, Curso curso, List<Alumno> alumnos, String nombre) {
+    public Grupo(Long id, Curso curso, List<Alumno> alumnos, String nombre) {
         this.id = id;
-        this.maestro = maestro;
         this.curso = curso;
         this.alumnos = alumnos;
         this.nombre = nombre;
     }
 
-    public Grupo(Long id, Maestro maestro, Curso curso, String nombre) {
+    public Grupo(Long id, Curso curso, String nombre) {
         this.id = id;
-        this.maestro = maestro;
         this.curso = curso;
         this.nombre = nombre;
         this.alumnos = new ArrayList<>();
@@ -68,14 +62,6 @@ public class Grupo {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Maestro getMaestro() {
-        return maestro;
-    }
-
-    public void setMaestro(Maestro maestro) {
-        this.maestro = maestro;
     }
 
     public Curso getCurso() {
@@ -106,7 +92,6 @@ public class Grupo {
     public int hashCode() {
         int hash = 3;
         hash = 79 * hash + Objects.hashCode(this.id);
-        hash = 79 * hash + Objects.hashCode(this.maestro);
         hash = 79 * hash + Objects.hashCode(this.curso);
         hash = 79 * hash + Objects.hashCode(this.nombre);
         return hash;
@@ -130,9 +115,6 @@ public class Grupo {
         if (!Objects.equals(this.id, other.id)) {
             return false;
         }
-        if (!Objects.equals(this.maestro, other.maestro)) {
-            return false;
-        }
         if (!Objects.equals(this.curso, other.curso)) {
             return false;
         }
@@ -141,7 +123,7 @@ public class Grupo {
 
     @Override
     public String toString() {
-        return "Grupo{" + "nombre=" + nombre + ", maestro=" + maestro + ", curso=" + curso + ", alumnos=" + alumnos + '}';
+        return "Grupo{" + "nombre=" + nombre + ", curso=" + curso + ", alumnos=" + alumnos + '}';
     }
 
     

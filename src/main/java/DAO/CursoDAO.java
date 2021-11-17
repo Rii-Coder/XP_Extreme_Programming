@@ -72,16 +72,16 @@ public class CursoDAO extends BaseDAO<Curso>{
         return new ArrayList<>(curso);
     }
     
-    public List<Curso> consultarCursos(String nombre){
+    public List<Curso> consultarCursos(String nombre, long id){
         EntityManager entityManager = this.createEntityManager();
         entityManager.getTransaction().begin();
         
         List<Curso> cursos;
          if (!nombre.equals("")) {
-            String jpql = String.format("SELECT * FROM dTKxX176tm.Curso WHERE dTKxX176tm.Curso.nombre = '%s';", nombre);
+            String jpql = "SELECT * FROM dTKxX176tm.Curso WHERE dTKxX176tm.Curso.idMaestro ="+ id + " AND dTKxX176tm.Curso.nombre LIKE '"+"%"+nombre+"%"+"';";
             cursos = entityManager.createNativeQuery(jpql, Curso.class).getResultList();
         } else {
-            String jpql = "SELECT * FROM dTKxX176tm.Curso;";
+            String jpql = String.format("SELECT * FROM dTKxX176tm.Curso WHERE dTKxX176tm.Curso.idMaestro = %s;", id);
             cursos = entityManager.createNativeQuery(jpql, Curso.class).getResultList();
         }
         entityManager.getTransaction().commit();

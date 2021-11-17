@@ -161,7 +161,6 @@ public class LoginGUI extends BaseGUI {
             //Iniciamos sesión, este método nos regresa un maestro.
             Maestro maestroChido = maestroDAO.iniciarSesion(maestro);
             if (maestroChido != null || !maestroChido.getNombre().equals("")) {
-                System.out.println("Bienvenido "+ maestroChido);
                 this.dispose();
                 new AdminCursoFm(maestroChido).setVisible(true);
             }
