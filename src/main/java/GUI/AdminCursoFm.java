@@ -120,6 +120,11 @@ public class AdminCursoFm extends BaseGUI {
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 180, 730, 420));
 
         btnEliminarCurso.setText("Eliminar");
+        btnEliminarCurso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarCursoActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnEliminarCurso, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 20, 150, 80));
 
         btnEditarCurso.setText("Editar");
@@ -262,6 +267,15 @@ public class AdminCursoFm extends BaseGUI {
     private void txtBuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyTyped
         cargarCursos();
     }//GEN-LAST:event_txtBuscarKeyTyped
+
+    private void btnEliminarCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarCursoActionPerformed
+
+        if (JOptionPane.showConfirmDialog(null, "¿Realmente desea borrar este curso?", "Confirmar salida", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == 0) {
+            cursoR.eliminar(seleccionado.getId());
+            JOptionPane.showMessageDialog(null, "Curso eliminado");
+            cargarCursos();
+        }
+    }//GEN-LAST:event_btnEliminarCursoActionPerformed
 
     private void cargarCursos() {
         List<Curso> cursos = this.cursoR.consultarCursos(txtBuscar.getText(), usuario.getId());
