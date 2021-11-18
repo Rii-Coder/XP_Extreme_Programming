@@ -1,17 +1,19 @@
 package Entities;
 
+import Entities.Alumno;
 import Entities.Curso;
-import Entities.Maestro;
 import javax.annotation.Generated;
+import javax.persistence.metamodel.ListAttribute;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
-@Generated(value="EclipseLink-2.7.7.v20200504-rNA", date="2021-11-10T18:17:10")
+@Generated(value="EclipseLink-2.7.7.v20200504-rNA", date="2021-11-17T23:19:05")
 @StaticMetamodel(Grupo.class)
 public class Grupo_ { 
 
+    public static volatile ListAttribute<Grupo, Alumno> alumnos;
     public static volatile SingularAttribute<Grupo, Curso> curso;
     public static volatile SingularAttribute<Grupo, Long> id;
-    public static volatile SingularAttribute<Grupo, Maestro> maestro;
+    public static volatile SingularAttribute<Grupo, String> nombre;
 
 }
