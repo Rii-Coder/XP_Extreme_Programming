@@ -274,6 +274,7 @@ public class AdminCursoFm extends BaseGUI {
             cursoR.eliminar(seleccionado.getId());
             JOptionPane.showMessageDialog(null, "Curso eliminado");
             cargarCursos();
+            System.out.println("eliminado");
         }
     }//GEN-LAST:event_btnEliminarCursoActionPerformed
 
