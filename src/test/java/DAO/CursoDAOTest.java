@@ -6,6 +6,7 @@
 package DAO;
 
 //import Entities.Curso;
+import Entities.Curso;
 import java.util.ArrayList;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.AfterAll;

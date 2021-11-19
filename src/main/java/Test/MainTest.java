@@ -9,21 +9,33 @@ import DAO.CursoDAO;
 import DAO.MaestroDAO;
 import Entities.Curso;
 import Entities.Maestro;
+import ObjetoNegocio.CsvImport;
 
 /**
  *
  * @author R2
  */
 public class MainTest {
+
     public static void main(String[] args) {
         
         
-        MaestroDAO maestros = new MaestroDAO();
+        
+        CsvImport csv = new CsvImport();
         try {
-            maestros.agregar(new Maestro("pepe", "123456", "pepe@gmail.com"));
+            csv.leer();
         } catch (Exception e) {
+            e.printStackTrace();
         }
         
+        
+        
+        
+//        MaestroDAO maestros = new MaestroDAO();
+//        try {
+//            maestros.agregar(new Maestro("pepe", "123456", "pepe@gmail.com"));
+//        } catch (Exception e) {
+//        }
         //CursoDAO cursos = new CursoDAO();
         //cursos.agregar(new Curso());
     }

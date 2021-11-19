@@ -8,6 +8,7 @@ package GUI;
 import DAO.CursoDAO;
 import Entities.Curso;
 import Entities.Maestro;
+import ObjetoNegocio.CsvImport;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
