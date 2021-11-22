@@ -36,12 +36,20 @@ public class ConsultarAsistenciasFm extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         cbxCursos = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
-        jCalendar1 = new com.toedter.calendar.JCalendar();
+        jCalendarDia = new com.toedter.calendar.JCalendar();
         panelAlumnos = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        TableAlumnosCSV = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnTablaAlumnosRegistrosAsistencias = new javax.swing.JTable();
+        btnBuscar = new javax.swing.JButton();
+        btnGenerarReporteasistencias = new javax.swing.JButton();
+        btnConsultarGrupo = new javax.swing.JButton();
+        btnConsultarCurso = new javax.swing.JButton();
+        btnConsultarUnidad = new javax.swing.JButton();
+        jSpinner1 = new javax.swing.JSpinner();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        txtNombreAlumnoConsultar = new javax.swing.JTextField();
+        btnConsultarAlumno = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -101,12 +109,12 @@ public class ConsultarAsistenciasFm extends javax.swing.JFrame {
 
         jLabel2.setText("Seleccione un curso:");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 110, -1, -1));
-        getContentPane().add(jCalendar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 40, -1, -1));
+        getContentPane().add(jCalendarDia, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 30, -1, -1));
 
         panelAlumnos.setBorder(javax.swing.BorderFactory.createTitledBorder("Alumnos"));
 
-        TableAlumnosCSV.setBorder(new javax.swing.border.MatteBorder(null));
-        TableAlumnosCSV.setModel(new javax.swing.table.DefaultTableModel(
+        btnTablaAlumnosRegistrosAsistencias.setBorder(new javax.swing.border.MatteBorder(null));
+        btnTablaAlumnosRegistrosAsistencias.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -114,7 +122,7 @@ public class ConsultarAsistenciasFm extends javax.swing.JFrame {
 
             }
         ));
-        jScrollPane1.setViewportView(TableAlumnosCSV);
+        jScrollPane1.setViewportView(btnTablaAlumnosRegistrosAsistencias);
 
         javax.swing.GroupLayout panelAlumnosLayout = new javax.swing.GroupLayout(panelAlumnos);
         panelAlumnos.setLayout(panelAlumnosLayout);
@@ -127,17 +135,37 @@ public class ConsultarAsistenciasFm extends javax.swing.JFrame {
         panelAlumnosLayout.setVerticalGroup(
             panelAlumnosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelAlumnosLayout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 457, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 417, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        getContentPane().add(panelAlumnos, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 200, 850, 490));
+        getContentPane().add(panelAlumnos, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 240, 850, 450));
 
-        jButton1.setText("Buscar");
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 50, 140, 110));
+        btnBuscar.setText("Buscar");
+        getContentPane().add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 20, 140, 170));
 
-        jButton2.setText("Generar reporte de asistencias");
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 50, 190, 110));
+        btnGenerarReporteasistencias.setText("Generar reporte de asistencias");
+        getContentPane().add(btnGenerarReporteasistencias, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 20, 190, 40));
+
+        btnConsultarGrupo.setText("Consultar por grupo");
+        getContentPane().add(btnConsultarGrupo, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 70, 190, -1));
+
+        btnConsultarCurso.setText("Consultar por curso");
+        getContentPane().add(btnConsultarCurso, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 110, 190, -1));
+
+        btnConsultarUnidad.setText("Consultar por unidad");
+        getContentPane().add(btnConsultarUnidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 150, 190, 30));
+        getContentPane().add(jSpinner1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 200, -1, -1));
+
+        jLabel3.setText("Unidad");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 200, 80, 10));
+
+        jLabel4.setText("Nombre alumno:");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 200, -1, -1));
+        getContentPane().add(txtNombreAlumnoConsultar, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 200, 370, -1));
+
+        btnConsultarAlumno.setText("Consultar por alumno");
+        getContentPane().add(btnConsultarAlumno, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 193, 190, 30));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -194,21 +222,29 @@ public class ConsultarAsistenciasFm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable TableAlumnosCSV;
     private javax.swing.JButton btnAdminCursosNavegar;
     private javax.swing.JButton btnAdminGruposNavegar;
+    private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnCerrarSesion;
+    private javax.swing.JButton btnConsultarAlumno;
     private javax.swing.JButton btnConsultarAsistenciasNavegar;
+    private javax.swing.JButton btnConsultarCurso;
+    private javax.swing.JButton btnConsultarGrupo;
+    private javax.swing.JButton btnConsultarUnidad;
+    private javax.swing.JButton btnGenerarReporteasistencias;
     private javax.swing.JButton btnImportAsistenciasNavegar;
+    private javax.swing.JTable btnTablaAlumnosRegistrosAsistencias;
     private javax.swing.JComboBox<String> cbxCursos;
     private javax.swing.JComboBox<String> cbxGrupos;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private com.toedter.calendar.JCalendar jCalendar1;
+    private com.toedter.calendar.JCalendar jCalendarDia;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSpinner jSpinner1;
     private javax.swing.JPanel panelAlumnos;
+    private javax.swing.JTextField txtNombreAlumnoConsultar;
     // End of variables declaration//GEN-END:variables
 }
