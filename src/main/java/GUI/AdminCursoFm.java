@@ -68,6 +68,12 @@ public class AdminCursoFm extends BaseGUI {
 
         jLabel2.setText("Nombre curso");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 20, -1, -1));
+
+        txtNombreCurso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNombreCursoActionPerformed(evt);
+            }
+        });
         getContentPane().add(txtNombreCurso, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 50, 150, -1));
 
         jLabel4.setText("Unidades");
@@ -276,8 +282,15 @@ public class AdminCursoFm extends BaseGUI {
             JOptionPane.showMessageDialog(null, "Curso eliminado");
             cargarCursos();
             System.out.println("eliminado");
+        } else {
+            System.out.println("Curso no eliminado");
         }
+        
     }//GEN-LAST:event_btnEliminarCursoActionPerformed
+
+    private void txtNombreCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreCursoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNombreCursoActionPerformed
 
     private void cargarCursos() {
         List<Curso> cursos = this.cursoR.consultarCursos(txtBuscar.getText(), usuario.getId());
@@ -290,6 +303,28 @@ public class AdminCursoFm extends BaseGUI {
         }
     }
    
+    
+    public static boolean validarNombre(String mNombre){
+        boolean checkStatus=false;
+
+        /*Verificamos que no sea null*/ 
+        if(mNombre != null){
+            /* 1ª Condición: que la letra inicial sea mayúscula*/
+            boolean isFirstUpper=Character.isUpperCase(mNombre.charAt(0));
+
+            /* 2ª Condición: que el tamaño sea >= 1 y <= 35*/
+            int stringSize=mNombre.length();
+            boolean isValidSize=(stringSize >= 1 && stringSize <= 35);
+
+            /* 3ª Condición: que contenga al menos un espacio*/
+            boolean isSpaced=mNombre.contains(" ");
+
+            /* Verificamos que las tres condiciones son verdaderas*/
+            checkStatus= ( (isFirstUpper==true)  && (isFirstUpper && isValidSize &&  isSpaced) );
+        }
+        /*Devolvemos el estado de la validación*/
+        return checkStatus;
+    }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton LogOut;

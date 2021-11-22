@@ -91,6 +91,12 @@ public class AdminGrupos extends javax.swing.JFrame {
 
         cbxCursos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         getContentPane().add(cbxCursos, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 180, 140, 30));
+
+        txtNombreGrupo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNombreGrupoActionPerformed(evt);
+            }
+        });
         getContentPane().add(txtNombreGrupo, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 120, 140, 30));
 
         jLabel1.setText("Nombre grupo:");
@@ -202,6 +208,10 @@ public class AdminGrupos extends javax.swing.JFrame {
     private void btnImportAsistenciasNavegarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImportAsistenciasNavegarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnImportAsistenciasNavegarActionPerformed
+
+    private void txtNombreGrupoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreGrupoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNombreGrupoActionPerformed
 
     /**
      * @param args the command line arguments
