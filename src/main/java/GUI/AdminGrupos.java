@@ -244,6 +244,8 @@ public class AdminGrupos extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnConsultarAsistenciasNavegarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarAsistenciasNavegarActionPerformed
+        this.dispose();
+        new ConsultarAsistenciasFm(usuario).setVisible(true);
         // TODO add your handling code here:
     }//GEN-LAST:event_btnConsultarAsistenciasNavegarActionPerformed
 
@@ -257,6 +259,8 @@ public class AdminGrupos extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAdminGruposNavegarActionPerformed
 
     private void btnImportAsistenciasNavegarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImportAsistenciasNavegarActionPerformed
+        this.dispose();
+        new ImportarAsistenciasFm(usuario).setVisible(true);
         // TODO add your handling code here:
     }//GEN-LAST:event_btnImportAsistenciasNavegarActionPerformed
 

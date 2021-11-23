@@ -26,9 +26,9 @@ public class AdminCursoFm extends javax.swing.JFrame {
     private CursoDAO cursoR;
     private Curso seleccionado;
     private Maestro usuario;
-    
+
     public AdminCursoFm(Maestro usuario) {
-        
+
         initComponents();
         cursoR = new CursoDAO();
         this.usuario = usuario;
@@ -220,26 +220,27 @@ public class AdminCursoFm extends javax.swing.JFrame {
         int unidades = (Integer) spnUnidades.getValue();
         seleccionado.setUnidades(unidades);
         if (txtNombreCurso.getText().equalsIgnoreCase("")) {
-             JOptionPane.showMessageDialog(null, "Verifique que el nombre del curso no esté vacío");
-        }else{
-           cursoR.actualizar(seleccionado);
-        cargarCursos(); 
+            JOptionPane.showMessageDialog(null, "Verifique que el nombre del curso no esté vacío");
+        } else {
+            cursoR.actualizar(seleccionado);
+            cargarCursos();
         }
-        
+
     }//GEN-LAST:event_btnEditarCursoActionPerformed
 
     private void btnAgregarCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarCursoActionPerformed
         int unidades = (Integer) spnUnidades.getValue();
         if (txtNombreCurso.getText().equalsIgnoreCase("")) {
-             JOptionPane.showMessageDialog(null, "Verifique que el nombre del curso no esté vacío");
-        }else{
-        cursoR.agregar(new Curso(txtNombreCurso.getText(), unidades,usuario));
-        cargarCursos();
+            JOptionPane.showMessageDialog(null, "Verifique que el nombre del curso no esté vacío");
+        } else {
+            cursoR.agregar(new Curso(txtNombreCurso.getText(), unidades, usuario));
+            cargarCursos();
         }
     }//GEN-LAST:event_btnAgregarCursoActionPerformed
 
     private void btnConsultarAsistenciasNavegarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarAsistenciasNavegarActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
+        new ConsultarAsistenciasFm(usuario).setVisible(true);
     }//GEN-LAST:event_btnConsultarAsistenciasNavegarActionPerformed
 
     private void btnAdminCursosNavegarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminCursosNavegarActionPerformed
@@ -252,7 +253,8 @@ public class AdminCursoFm extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAdminGruposNavegarActionPerformed
 
     private void btnImportAsistenciasNavegarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImportAsistenciasNavegarActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
+        new ImportarAsistenciasFm(usuario).setVisible(true);
     }//GEN-LAST:event_btnImportAsistenciasNavegarActionPerformed
 
     private void txtBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarActionPerformed
@@ -260,8 +262,8 @@ public class AdminCursoFm extends javax.swing.JFrame {
     }//GEN-LAST:event_txtBuscarActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-        int seleccionar =jTable1.rowAtPoint(evt.getPoint());
-        Long id = (Long)(jTable1.getValueAt(seleccionar, 0));
+        int seleccionar = jTable1.rowAtPoint(evt.getPoint());
+        Long id = (Long) (jTable1.getValueAt(seleccionar, 0));
         Curso curso = cursoR.buscarPorId(id);
         this.seleccionado = curso;
         txtNombreCurso.setText(curso.getNombre());

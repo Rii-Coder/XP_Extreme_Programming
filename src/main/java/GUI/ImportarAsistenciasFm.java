@@ -166,26 +166,31 @@ public class ImportarAsistenciasFm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnConsultarAsistenciasNavegarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarAsistenciasNavegarActionPerformed
-        // TODO add your handling code here:
+    this.dispose();
+    new ConsultarAsistenciasFm(usuario).setVisible(true);
     }//GEN-LAST:event_btnConsultarAsistenciasNavegarActionPerformed
 
     private void btnAdminGruposNavegarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminGruposNavegarActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
+        new AdminGrupos(usuario).setVisible(true);
     }//GEN-LAST:event_btnAdminGruposNavegarActionPerformed
 
     private void btnImportAsistenciasNavegarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImportAsistenciasNavegarActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_btnImportAsistenciasNavegarActionPerformed
 
     private void btnAdminCursosNavegarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminCursosNavegarActionPerformed
-        // TODO add your handling code here:
+
+        this.dispose();
+        new AdminCursoFm(usuario).setVisible(true);
+
     }//GEN-LAST:event_btnAdminCursosNavegarActionPerformed
 
     private void btnBuscarArchivoEnMiPcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarArchivoEnMiPcActionPerformed
         cargarTabla();
     }//GEN-LAST:event_btnBuscarArchivoEnMiPcActionPerformed
 
-    private void cargarTabla(){
+    private void cargarTabla() {
         CsvImport csv = new CsvImport();
         try {
             csv.CargarTabla(TableAlumnosCSV);
