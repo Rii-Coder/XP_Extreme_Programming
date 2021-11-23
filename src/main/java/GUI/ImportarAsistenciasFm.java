@@ -50,6 +50,7 @@ public class ImportarAsistenciasFm extends javax.swing.JFrame {
         btnBuscarArchivoEnMiPc = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         btnConfirmarAsistencias = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -93,6 +94,8 @@ public class ImportarAsistenciasFm extends javax.swing.JFrame {
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Navegar"));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        btnConsultarAsistenciasNavegar.setFont(new java.awt.Font("Tahoma", 3, 12)); // NOI18N
+        btnConsultarAsistenciasNavegar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Calendar.png"))); // NOI18N
         btnConsultarAsistenciasNavegar.setText("Consultar asistencias");
         btnConsultarAsistenciasNavegar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnConsultarAsistenciasNavegar.addActionListener(new java.awt.event.ActionListener() {
@@ -102,6 +105,8 @@ public class ImportarAsistenciasFm extends javax.swing.JFrame {
         });
         jPanel2.add(btnConsultarAsistenciasNavegar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 360, 170, 90));
 
+        btnAdminGruposNavegar.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
+        btnAdminGruposNavegar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Control_Panel.png"))); // NOI18N
         btnAdminGruposNavegar.setText("Administrar Grupos");
         btnAdminGruposNavegar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnAdminGruposNavegar.addActionListener(new java.awt.event.ActionListener() {
@@ -111,6 +116,8 @@ public class ImportarAsistenciasFm extends javax.swing.JFrame {
         });
         jPanel2.add(btnAdminGruposNavegar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 170, 90));
 
+        btnImportAsistenciasNavegar.setFont(new java.awt.Font("Tahoma", 3, 12)); // NOI18N
+        btnImportAsistenciasNavegar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Package.png"))); // NOI18N
         btnImportAsistenciasNavegar.setText("Importar asistencias");
         btnImportAsistenciasNavegar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnImportAsistenciasNavegar.addActionListener(new java.awt.event.ActionListener() {
@@ -120,6 +127,8 @@ public class ImportarAsistenciasFm extends javax.swing.JFrame {
         });
         jPanel2.add(btnImportAsistenciasNavegar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, 170, 90));
 
+        btnAdminCursosNavegar.setFont(new java.awt.Font("Tahoma", 3, 12)); // NOI18N
+        btnAdminCursosNavegar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Windows_View_Detail.png"))); // NOI18N
         btnAdminCursosNavegar.setText("Administrar Cursos");
         btnAdminCursosNavegar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnAdminCursosNavegar.addActionListener(new java.awt.event.ActionListener() {
@@ -131,6 +140,10 @@ public class ImportarAsistenciasFm extends javax.swing.JFrame {
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 190, 470));
 
+        btnCerrarSesion.setBackground(new java.awt.Color(255, 51, 51));
+        btnCerrarSesion.setFont(new java.awt.Font("Tahoma", 3, 12)); // NOI18N
+        btnCerrarSesion.setForeground(new java.awt.Color(255, 0, 0));
+        btnCerrarSesion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Security_Firewall_OFF.png"))); // NOI18N
         btnCerrarSesion.setText("Cerrar sesión");
         getContentPane().add(btnCerrarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 180, 60));
 
@@ -146,6 +159,8 @@ public class ImportarAsistenciasFm extends javax.swing.JFrame {
         jLabel2.setText("Seleccione un curso:");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 80, -1, -1));
 
+        btnBuscarArchivoEnMiPc.setFont(new java.awt.Font("Tahoma", 3, 12)); // NOI18N
+        btnBuscarArchivoEnMiPc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/folder_beige_explorer.png"))); // NOI18N
         btnBuscarArchivoEnMiPc.setText("BROWSE");
         btnBuscarArchivoEnMiPc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -158,9 +173,17 @@ public class ImportarAsistenciasFm extends javax.swing.JFrame {
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 80, -1, -1));
 
         btnConfirmarAsistencias.setBackground(new java.awt.Color(153, 204, 0));
+        btnConfirmarAsistencias.setFont(new java.awt.Font("Tahoma", 3, 12)); // NOI18N
         btnConfirmarAsistencias.setForeground(new java.awt.Color(0, 153, 0));
+        btnConfirmarAsistencias.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Tips.png"))); // NOI18N
         btnConfirmarAsistencias.setText("Confirmar asistencias");
-        getContentPane().add(btnConfirmarAsistencias, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 10, 250, 60));
+        getContentPane().add(btnConfirmarAsistencias, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 10, 250, 60));
+
+        jLabel4.setFont(new java.awt.Font("UD Digi Kyokasho N-B", 0, 36)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 51, 102));
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/noted_note_pen_notebook_write_icon_193919 (2).png"))); // NOI18N
+        jLabel4.setText("ASSISTANCER");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 10, 300, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -221,6 +244,7 @@ public class ImportarAsistenciasFm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel panelAlumnos;

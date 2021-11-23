@@ -62,26 +62,29 @@ public class AdminCursoFm extends javax.swing.JFrame {
         btnImportAsistenciasNavegar = new javax.swing.JButton();
         txtBuscar = new javax.swing.JTextField();
         LogOut = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Administrar cursos");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel2.setFont(new java.awt.Font("UD Digi Kyokasho N-B", 1, 12)); // NOI18N
         jLabel2.setText("Nombre curso");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 20, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 80, -1, -1));
 
         txtNombreCurso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNombreCursoActionPerformed(evt);
             }
         });
-        getContentPane().add(txtNombreCurso, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 50, 150, -1));
+        getContentPane().add(txtNombreCurso, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 110, 150, -1));
 
+        jLabel4.setFont(new java.awt.Font("UD Digi Kyokasho N-B", 1, 12)); // NOI18N
         jLabel4.setText("Unidades");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 80, 80, -1));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 150, 80, -1));
 
         spnUnidades.setModel(new javax.swing.SpinnerNumberModel(1, 1, 10, 1));
-        getContentPane().add(spnUnidades, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 110, -1, -1));
+        getContentPane().add(spnUnidades, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 170, -1, -1));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Cursos existentes"));
 
@@ -125,35 +128,43 @@ public class AdminCursoFm extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 180, 730, 420));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 220, 730, 420));
 
+        btnEliminarCurso.setFont(new java.awt.Font("Tahoma", 3, 12)); // NOI18N
+        btnEliminarCurso.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Delete.png"))); // NOI18N
         btnEliminarCurso.setText("Eliminar");
         btnEliminarCurso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEliminarCursoActionPerformed(evt);
             }
         });
-        getContentPane().add(btnEliminarCurso, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 20, 150, 80));
+        getContentPane().add(btnEliminarCurso, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 80, 150, 80));
 
+        btnEditarCurso.setFont(new java.awt.Font("Tahoma", 3, 12)); // NOI18N
+        btnEditarCurso.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Help.png"))); // NOI18N
         btnEditarCurso.setText("Editar");
         btnEditarCurso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEditarCursoActionPerformed(evt);
             }
         });
-        getContentPane().add(btnEditarCurso, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 20, 150, 80));
+        getContentPane().add(btnEditarCurso, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 80, 150, 80));
 
+        btnAgregarCurso.setFont(new java.awt.Font("Tahoma", 3, 12)); // NOI18N
+        btnAgregarCurso.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Tips.png"))); // NOI18N
         btnAgregarCurso.setText("Agregar");
         btnAgregarCurso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAgregarCursoActionPerformed(evt);
             }
         });
-        getContentPane().add(btnAgregarCurso, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 20, 140, 80));
+        getContentPane().add(btnAgregarCurso, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 80, 140, 80));
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Navegar"));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        btnConsultarAsistenciasNavegar.setFont(new java.awt.Font("Tahoma", 3, 12)); // NOI18N
+        btnConsultarAsistenciasNavegar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Calendar.png"))); // NOI18N
         btnConsultarAsistenciasNavegar.setText("Consultar asistencias");
         btnConsultarAsistenciasNavegar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnConsultarAsistenciasNavegar.addActionListener(new java.awt.event.ActionListener() {
@@ -163,6 +174,8 @@ public class AdminCursoFm extends javax.swing.JFrame {
         });
         jPanel2.add(btnConsultarAsistenciasNavegar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 360, 170, 90));
 
+        btnAdminCursosNavegar.setFont(new java.awt.Font("Tahoma", 3, 12)); // NOI18N
+        btnAdminCursosNavegar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Windows_View_Detail.png"))); // NOI18N
         btnAdminCursosNavegar.setText("Administrar Cursos");
         btnAdminCursosNavegar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnAdminCursosNavegar.addActionListener(new java.awt.event.ActionListener() {
@@ -172,6 +185,8 @@ public class AdminCursoFm extends javax.swing.JFrame {
         });
         jPanel2.add(btnAdminCursosNavegar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 170, 90));
 
+        btnAdminGruposNavegar.setFont(new java.awt.Font("Tahoma", 3, 12)); // NOI18N
+        btnAdminGruposNavegar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Control_Panel.png"))); // NOI18N
         btnAdminGruposNavegar.setText("Administrar Grupos");
         btnAdminGruposNavegar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnAdminGruposNavegar.addActionListener(new java.awt.event.ActionListener() {
@@ -181,6 +196,8 @@ public class AdminCursoFm extends javax.swing.JFrame {
         });
         jPanel2.add(btnAdminGruposNavegar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 170, 90));
 
+        btnImportAsistenciasNavegar.setFont(new java.awt.Font("Tahoma", 3, 12)); // NOI18N
+        btnImportAsistenciasNavegar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Package.png"))); // NOI18N
         btnImportAsistenciasNavegar.setText("Importar asistencias");
         btnImportAsistenciasNavegar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnImportAsistenciasNavegar.addActionListener(new java.awt.event.ActionListener() {
@@ -190,7 +207,7 @@ public class AdminCursoFm extends javax.swing.JFrame {
         });
         jPanel2.add(btnImportAsistenciasNavegar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, 170, 90));
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 190, 470));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 190, 470));
 
         txtBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -202,8 +219,12 @@ public class AdminCursoFm extends javax.swing.JFrame {
                 txtBuscarKeyTyped(evt);
             }
         });
-        getContentPane().add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 130, 500, -1));
+        getContentPane().add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 190, 500, -1));
 
+        LogOut.setBackground(new java.awt.Color(255, 0, 51));
+        LogOut.setFont(new java.awt.Font("Tahoma", 3, 12)); // NOI18N
+        LogOut.setForeground(new java.awt.Color(255, 51, 51));
+        LogOut.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Security_Firewall_OFF.png"))); // NOI18N
         LogOut.setText("Cerrar sesión");
         LogOut.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -211,6 +232,12 @@ public class AdminCursoFm extends javax.swing.JFrame {
             }
         });
         getContentPane().add(LogOut, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 160, 40));
+
+        jLabel5.setFont(new java.awt.Font("UD Digi Kyokasho N-B", 0, 36)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 51, 102));
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/noted_note_pen_notebook_write_icon_193919 (2).png"))); // NOI18N
+        jLabel5.setText("ASSISTANCER");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 10, 300, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -348,6 +375,7 @@ public class AdminCursoFm extends javax.swing.JFrame {
     private javax.swing.JButton btnImportAsistenciasNavegar;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
