@@ -247,7 +247,8 @@ public class AdminCursoFm extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAdminCursosNavegarActionPerformed
 
     private void btnAdminGruposNavegarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminGruposNavegarActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
+        new AdminGrupos(usuario).setVisible(true);
     }//GEN-LAST:event_btnAdminGruposNavegarActionPerformed
 
     private void btnImportAsistenciasNavegarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImportAsistenciasNavegarActionPerformed

@@ -47,7 +47,6 @@ public class GrupoDAO extends BaseDAO<Grupo>{
             grupo.setCurso(entidad.getCurso());
             grupo.setFechaInicio(entidad.getFechaInicio());
             grupo.setAlumno_has_grupos(entidad.getAlumno_has_grupos());
-            //Set fecha grupo.set
             entityManager.merge(grupo);
         }
         entityManager.getTransaction().commit();
@@ -73,5 +72,23 @@ public class GrupoDAO extends BaseDAO<Grupo>{
         entityManager.getTransaction().commit();
         return new ArrayList<>(grupo);
     }
+    
+    public List<Grupo> consultarGrupos(String nombre, long id){
+        EntityManager entityManager = this.createEntityManager();
+        entityManager.getTransaction().begin();
+        
+        List<Grupo> grupos;
+         if (!nombre.equals("")) {
+            String jpql = "SELECT * FROM dTKxX176tm.Grupo WHERE dTKxX176tm.Grupo.idCurso ="+ id + " AND dTKxX176tm.Grupo.nombre LIKE '"+"%"+nombre+"%"+"';";
+            grupos = entityManager.createNativeQuery(jpql, Grupo.class).getResultList();
+        } else {
+            String jpql = String.format("SELECT * FROM dTKxX176tm.Grupo WHERE dTKxX176tm.Grupo.idCurso = %s;", id);
+            grupos = entityManager.createNativeQuery(jpql, Grupo.class).getResultList();
+        }
+        entityManager.getTransaction().commit();
+        return grupos;
+        
+    }
+    
     
 }

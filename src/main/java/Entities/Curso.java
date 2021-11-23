@@ -104,8 +104,10 @@ public class Curso {
 
     @Override
     public String toString() {
-        return "Curso{" + "id=" + id + ", nombre=" + nombre + ", maestro=" + maestro + ", unidades=" + unidades + '}';
+        return nombre;
     }
+
+    
     
     @Override
     public int hashCode() {

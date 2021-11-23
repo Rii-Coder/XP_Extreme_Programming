@@ -101,11 +101,9 @@ public class Grupo {
 
     @Override
     public int hashCode() {
-        int hash = 7;
+        int hash = 3;
         hash = 53 * hash + Objects.hashCode(this.id);
-        hash = 53 * hash + Objects.hashCode(this.curso);
         hash = 53 * hash + Objects.hashCode(this.nombre);
-        hash = 53 * hash + Objects.hashCode(this.fechaInicio);
         return hash;
     }
 
@@ -121,24 +119,29 @@ public class Grupo {
             return false;
         }
         final Grupo other = (Grupo) obj;
-        if (!Objects.equals(this.nombre, other.nombre)) {
-            return false;
-        }
-        if (!Objects.equals(this.id, other.id)) {
-            return false;
-        }
-        if (!Objects.equals(this.curso, other.curso)) {
-            return false;
-        }
-        if (!Objects.equals(this.fechaInicio, other.fechaInicio)) {
+        if (!Objects.equals(this.nombre, other.nombre) && !Objects.equals(this.id, other.id)) {
             return false;
         }
         return true;
     }
 
+   
+    
+
     @Override
     public String toString() {
         return "Grupo{" + "id=" + id + ", curso=" + curso + ", nombre=" + nombre + ", fechaInicio=" + fechaInicio + '}';
+    }
+    
+    public Object[] toArray() {
+        return new Object[]{
+            this.id,
+            this.nombre,
+            this.curso.getNombre(),
+            this.getFechaInicio().toString()
+            
+        };
+
     }
 
 }

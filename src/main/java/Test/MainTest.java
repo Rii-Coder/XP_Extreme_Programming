@@ -6,8 +6,10 @@
 package Test;
 
 import DAO.CursoDAO;
+import DAO.GrupoDAO;
 import DAO.MaestroDAO;
 import Entities.Curso;
+import Entities.Grupo;
 import Entities.Maestro;
 import ObjetoNegocio.CsvImport;
 
@@ -28,7 +30,12 @@ public class MainTest {
 //            e.printStackTrace();
 //        }
         
-        
+//        GrupoDAO grupos = new MaestroDAO();
+//        try {
+//            grupos.actualizar(new Grupo(4, curso, nombre, fechaInicio));
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
         
         
 //        MaestroDAO maestros = new MaestroDAO();
