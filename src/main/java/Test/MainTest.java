@@ -21,20 +21,21 @@ public class MainTest {
         
         
         
-        CsvImport csv = new CsvImport();
-        try {
-            csv.leer();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        CsvImport csv = new CsvImport();
+//        try {
+//            csv.leer();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
         
         
         
         
 //        MaestroDAO maestros = new MaestroDAO();
 //        try {
-//            maestros.agregar(new Maestro("pepe", "123456", "pepe@gmail.com"));
+//            maestros.agregar(new Maestro("china", "123", "china@gmail.com"));
 //        } catch (Exception e) {
+//            e.printStackTrace();
 //        }
         //CursoDAO cursos = new CursoDAO();
         //cursos.agregar(new Curso());

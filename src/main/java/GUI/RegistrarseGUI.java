@@ -6,6 +6,8 @@ package GUI;
 
 import DAO.MaestroDAO;
 import Entities.Maestro;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
@@ -14,7 +16,7 @@ import javax.swing.JOptionPane;
  *
  * @author Jbran
  */
-public class RegistrarseGUI extends BaseGUI {
+public class RegistrarseGUI extends javax.swing.JFrame {
 
     /**
      * Creates new form RegistrarseGUI
@@ -203,6 +205,13 @@ public class RegistrarseGUI extends BaseGUI {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNombreActionPerformed
 
+    
+    public void centrarPantalla() {
+        Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+        int x = (int) ((dimension.getWidth() - this.getWidth()) / 2);
+        int y = (int) ((dimension.getHeight() - this.getHeight()) / 2);
+        this.setLocation(x, y);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnRegistrarme;

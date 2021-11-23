@@ -8,7 +8,8 @@ package GUI;
 import DAO.CursoDAO;
 import Entities.Curso;
 import Entities.Maestro;
-import ObjetoNegocio.CsvImport;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -17,7 +18,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Jbran
  */
-public class AdminCursoFm extends BaseGUI {
+public class AdminCursoFm extends javax.swing.JFrame {
 
     /**
      * Creates new form AdministrarCurso
@@ -324,6 +325,13 @@ public class AdminCursoFm extends BaseGUI {
         }
         /*Devolvemos el estado de la validación*/
         return checkStatus;
+    }
+    
+    public void centrarPantalla() {
+        Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+        int x = (int) ((dimension.getWidth() - this.getWidth()) / 2);
+        int y = (int) ((dimension.getHeight() - this.getHeight()) / 2);
+        this.setLocation(x, y);
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

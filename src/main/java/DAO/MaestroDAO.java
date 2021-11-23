@@ -6,17 +6,12 @@
 package DAO;
 
 import Entities.Maestro;
-import com.sun.org.apache.xml.internal.security.algorithms.MessageDigestAlgorithm;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaQuery;
-import java.security.MessageDigest;
-import java.security.MessageDigestSpi;
-import java.security.NoSuchAlgorithmException;
-import org.apache.commons.codec.digest.MessageDigestAlgorithms;
-import org.codehaus.plexus.util.Base64;
+
 
 /**
  *

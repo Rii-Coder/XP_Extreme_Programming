@@ -44,11 +44,7 @@ public class AlumnoDAO extends BaseDAO<Alumno> {
         Alumno alumno = entityManager.find(Alumno.class, entidad.getId());
         if (alumno != null) {
             alumno.setNombre(entidad.getNombre());
-            alumno.setCarrera(entidad.getCarrera());
-            alumno.setEdad(entidad.getEdad());
-            alumno.setAñoIngreso(entidad.getAñoIngreso());
-            alumno.setNumMaterias(entidad.getNumMaterias());
-            alumno.setGrupo(entidad.getGrupo());
+            alumno.setAlumno_has_grupos(entidad.getAlumno_has_grupos());
             entityManager.merge(alumno);
         }
         entityManager.getTransaction().commit();

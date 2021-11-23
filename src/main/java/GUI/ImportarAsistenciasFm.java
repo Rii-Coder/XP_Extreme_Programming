@@ -4,17 +4,25 @@
  */
 package GUI;
 
+import Entities.Maestro;
+import ObjetoNegocio.CsvImport;
+import java.awt.Dimension;
+import java.awt.Toolkit;
+
 /**
  *
  * @author Jbran
  */
 public class ImportarAsistenciasFm extends javax.swing.JFrame {
 
+    private Maestro usuario;
+    
     /**
      * Creates new form ImportarAsistenciasFm
      */
-    public ImportarAsistenciasFm() {
+    public ImportarAsistenciasFm(Maestro usuario) {
         initComponents();
+        this.usuario = usuario;
     }
 
     /**
@@ -54,9 +62,17 @@ public class ImportarAsistenciasFm extends javax.swing.JFrame {
 
             },
             new String [] {
-
+                "Nombre", "Asistencia"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(TableAlumnosCSV);
 
         javax.swing.GroupLayout panelAlumnosLayout = new javax.swing.GroupLayout(panelAlumnos);
@@ -69,7 +85,7 @@ public class ImportarAsistenciasFm extends javax.swing.JFrame {
             panelAlumnosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelAlumnosLayout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 8, Short.MAX_VALUE))
+                .addGap(0, 7, Short.MAX_VALUE))
         );
 
         getContentPane().add(panelAlumnos, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 160, 660, 420));
@@ -131,6 +147,11 @@ public class ImportarAsistenciasFm extends javax.swing.JFrame {
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 80, -1, -1));
 
         btnBuscarArchivoEnMiPc.setText("BROWSE");
+        btnBuscarArchivoEnMiPc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarArchivoEnMiPcActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnBuscarArchivoEnMiPc, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 100, 170, 50));
 
         jLabel3.setText("Importar CSV");
@@ -160,39 +181,25 @@ public class ImportarAsistenciasFm extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnAdminCursosNavegarActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ImportarAsistenciasFm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ImportarAsistenciasFm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ImportarAsistenciasFm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ImportarAsistenciasFm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void btnBuscarArchivoEnMiPcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarArchivoEnMiPcActionPerformed
+        cargarTabla();
+    }//GEN-LAST:event_btnBuscarArchivoEnMiPcActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ImportarAsistenciasFm().setVisible(true);
-            }
-        });
+    private void cargarTabla(){
+        CsvImport csv = new CsvImport();
+        try {
+            csv.CargarTabla(TableAlumnosCSV);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+   
+    public void centrarPantalla() {
+        Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+        int x = (int) ((dimension.getWidth() - this.getWidth()) / 2);
+        int y = (int) ((dimension.getHeight() - this.getHeight()) / 2);
+        this.setLocation(x, y);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

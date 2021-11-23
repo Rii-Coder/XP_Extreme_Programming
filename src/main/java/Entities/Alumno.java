@@ -6,14 +6,16 @@
 package Entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -27,46 +29,25 @@ public class Alumno implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "idGrupo")
-    private Grupo grupo;
-    
+
+    @OneToMany(mappedBy = "alumno", cascade = CascadeType.ALL)
+    private List<Alumno_has_grupo> alumno_has_grupos;
+
     @Column(name = "Nombre", nullable = false, length = 100)
     private String nombre;
-    
-    @Column(name = "AñoIngreso", nullable = false, length = 100)
-    private int añoIngreso;
-    
-    @Column(name = "Carrera", nullable = false, length = 100)
-    private String carrera;
-    
-    @Column(name = "Edad", nullable = false, length = 100)
-    private int edad;
-    
-    @Column(name = "numMaterias", nullable = false, length = 100)
-    private int numMaterias;
 
     public Alumno() {
     }
 
-    public Alumno(Long id, Grupo grupo, String nombre, int añoIngreso, String carrera, int edad, int numMaterias) {
+    public Alumno(Long id, String nombre) {
         this.id = id;
-        this.grupo = grupo;
         this.nombre = nombre;
-        this.añoIngreso = añoIngreso;
-        this.carrera = carrera;
-        this.edad = edad;
-        this.numMaterias = numMaterias;
+        alumno_has_grupos = new ArrayList<>();
     }
 
-    public Alumno(Grupo grupo, String nombre, int añoIngreso, String carrera, int edad, int numMaterias) {
-        this.grupo = grupo;
+    public Alumno(String nombre) {
         this.nombre = nombre;
-        this.añoIngreso = añoIngreso;
-        this.carrera = carrera;
-        this.edad = edad;
-        this.numMaterias = numMaterias;
+        alumno_has_grupos = new ArrayList<>();
     }
 
     public Long getId() {
@@ -77,12 +58,12 @@ public class Alumno implements Serializable {
         this.id = id;
     }
 
-    public Grupo getGrupo() {
-        return grupo;
+    public List<Alumno_has_grupo> getAlumno_has_grupos() {
+        return alumno_has_grupos;
     }
 
-    public void setGrupo(Grupo grupo) {
-        this.grupo = grupo;
+    public void setAlumno_has_grupos(List<Alumno_has_grupo> alumno_has_grupos) {
+        this.alumno_has_grupos = alumno_has_grupos;
     }
 
     public String getNombre() {
@@ -90,46 +71,13 @@ public class Alumno implements Serializable {
     }
 
     public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public int getAñoIngreso() {
-        return añoIngreso;
-    }
-
-    public void setAñoIngreso(int añoIngreso) {
-        this.añoIngreso = añoIngreso;
-    }
-
-    public String getCarrera() {
-        return carrera;
-    }
-
-    public void setCarrera(String carrera) {
-        this.carrera = carrera;
-    }
-
-    public int getEdad() {
-        return edad;
-    }
-
-    public void setEdad(int edad) {
-        this.edad = edad;
-    }
-
-    public int getNumMaterias() {
-        return numMaterias;
-    }
-
-    public void setNumMaterias(int numMaterias) {
-        this.numMaterias = numMaterias;
     }
 
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 31 * hash + Objects.hashCode(this.id);
-        hash = 31 * hash + Objects.hashCode(this.nombre);
+        hash = 47 * hash + Objects.hashCode(this.id);
+        hash = 47 * hash + Objects.hashCode(this.nombre);
         return hash;
     }
 
@@ -154,14 +102,11 @@ public class Alumno implements Serializable {
         return true;
     }
 
+    
+
     @Override
     public String toString() {
-        return "Alumno{" + "grupo=" + grupo + ", nombre=" + nombre + ", añoIngreso=" + añoIngreso + ", carrera=" + carrera + ", edad=" + edad + ", numMaterias=" + numMaterias + '}';
+        return "Alumno{" + "id=" + id + ", nombre=" + nombre + '}';
     }
 
-    
-
-    
-    
-    
 }

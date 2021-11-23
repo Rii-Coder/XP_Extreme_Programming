@@ -7,9 +7,9 @@ package GUI;
 
 import Entities.Maestro;
 import java.security.NoSuchAlgorithmException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import DAO.MaestroDAO;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import javax.persistence.NoResultException;
 import javax.swing.JOptionPane;
 
@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
  *
  * @author R2
  */
-public class LoginGUI extends BaseGUI {
+public class LoginGUI extends javax.swing.JFrame {
 
     private MaestroDAO maestroDAO;
     
@@ -212,6 +212,13 @@ public class LoginGUI extends BaseGUI {
                 new LoginGUI().setVisible(true);
             }
         });
+    }
+    
+    public void centrarPantalla() {
+        Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+        int x = (int) ((dimension.getWidth() - this.getWidth()) / 2);
+        int y = (int) ((dimension.getHeight() - this.getHeight()) / 2);
+        this.setLocation(x, y);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -5,20 +5,25 @@
  */
 package ObjetoNegocio;
 
-import com.opencsv.CSVReader;
+import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
+
+
 
 /**
  *
  * @author R2
  */
+
+
 public class CsvImport {
 
     public void leer() throws IOException {
@@ -46,25 +51,19 @@ public class CsvImport {
             return;
         }
 
-        CSVReader reader = null;
+        try (FileInputStream fis = new FileInputStream(absolutePath);
+                InputStreamReader isr = new InputStreamReader(fis, StandardCharsets.UTF_8);
+                BufferedReader reader = new BufferedReader(isr)) {
 
-        try {
-
-            //parsing a CSV file into CSVReader class constructor  
-            reader = new CSVReader(new FileReader(absolutePath));
-            String[] nextLine;
-
-            //reads one line at a time  
-            while ((nextLine = reader.readNext()) != null) {
-                for (String token : nextLine) {
-                    System.out.print(token + " ");
-                }
-                System.out.println("|");
+            String str;
+            while ((str = reader.readLine()) != null) {
+                System.out.println(str);
             }
 
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
+
     }
 
     public void CargarTabla(JTable tabla) throws IOException {
@@ -92,12 +91,10 @@ public class CsvImport {
             return;
         }
 
-        CSVReader reader = null;
+        try (FileInputStream fis = new FileInputStream(absolutePath);
+                InputStreamReader isr = new InputStreamReader(fis, StandardCharsets.UTF_8);
+                BufferedReader reader = new BufferedReader(isr)) {
 
-        try {
-
-            //parsing a CSV file into CSVReader class constructor  
-            reader = new CSVReader(new FileReader(absolutePath));
             String[] nextLine;
 
             DefaultTableModel modelo = (DefaultTableModel) tabla.getModel();
@@ -105,21 +102,31 @@ public class CsvImport {
 
             int c = 0;
 
-//            //reads one line at a time  
-            while ((nextLine = reader.readNext()) != null) {
-                int i = 0;
+            String str;
+            while ((str = reader.readLine()) != null) {
                 if (c > 2) {
-                    String[] array = new String[5];
-                    for (String token : nextLine) {
-                        array[i] = token;
-                        i++;
+                    String[] array = str.split(",");
+                    String[] last = new String[2];
+                    last[0] = array[0];
+                    if (array.length > 1) {
+
+                        if (array[1].equals("?") || array[1].equals("✔")) {
+
+                            last[1] = array[1];
+
+                        } else {
+                            last[1] = " ";
+                        }
+
+                    } else {
+                        last[1] = " ";
                     }
-                    modelo.addRow(array);
+                    modelo.addRow(last);
                 }
                 c++;
             }
 
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
