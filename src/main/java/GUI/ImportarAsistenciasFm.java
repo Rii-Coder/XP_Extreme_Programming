@@ -131,10 +131,10 @@ public class ImportarAsistenciasFm extends javax.swing.JFrame {
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 80, -1, -1));
 
         btnBuscarArchivoEnMiPc.setText("BROWSE");
-        getContentPane().add(btnBuscarArchivoEnMiPc, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 100, 170, 50));
+        getContentPane().add(btnBuscarArchivoEnMiPc, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 100, 170, 50));
 
         jLabel3.setText("Importar CSV");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 80, -1, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 80, -1, -1));
 
         btnConfirmarAsistencias.setBackground(new java.awt.Color(153, 204, 0));
         btnConfirmarAsistencias.setForeground(new java.awt.Color(0, 153, 0));
