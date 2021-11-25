@@ -34,6 +34,9 @@ public class Grupo {
 
     @OneToMany(mappedBy = "grupo", cascade = CascadeType.ALL)
     private List<Alumno_has_grupo> alumno_has_grupos;
+    
+    @OneToMany(mappedBy = "grupo", cascade = CascadeType.ALL)
+    private List<Alumno> alumnos;
 
     @Column(name = "Nombre")
     private String nombre;
@@ -44,12 +47,13 @@ public class Grupo {
     public Grupo() {
     }
 
-    public Grupo(Long id, Curso curso, String nombre, Date fechaInicio) {
+    public Grupo(Long id, Curso curso, List<Alumno_has_grupo> alumno_has_grupos, List<Alumno> alumnos, String nombre, Date fechaInicio) {
         this.id = id;
         this.curso = curso;
+        this.alumno_has_grupos = alumno_has_grupos;
+        this.alumnos = alumnos;
         this.nombre = nombre;
         this.fechaInicio = fechaInicio;
-        alumno_has_grupos = new ArrayList<>();
     }
 
     public Grupo(Curso curso, String nombre, Date fechaInicio) {
@@ -57,6 +61,7 @@ public class Grupo {
         this.nombre = nombre;
         this.fechaInicio = fechaInicio;
         alumno_has_grupos = new ArrayList<>();
+        alumnos = new ArrayList<>();
     }
 
     public Long getId() {
@@ -97,6 +102,14 @@ public class Grupo {
 
     public void setFechaInicio(Date fechaInicio) {
         this.fechaInicio = fechaInicio;
+    }
+
+    public List<Alumno> getAlumnos() {
+        return alumnos;
+    }
+
+    public void setAlumnos(List<Alumno> alumnos) {
+        this.alumnos = alumnos;
     }
 
     @Override

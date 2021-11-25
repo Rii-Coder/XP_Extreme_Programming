@@ -15,6 +15,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -35,18 +37,24 @@ public class Alumno implements Serializable {
 
     @Column(name = "Nombre", nullable = false, length = 100)
     private String nombre;
+    
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "idGrupo")
+    private Grupo grupo;
 
     public Alumno() {
     }
 
-    public Alumno(Long id, String nombre) {
+    public Alumno(Long id, List<Alumno_has_grupo> alumno_has_grupos, String nombre, Grupo grupo) {
         this.id = id;
+        this.alumno_has_grupos = alumno_has_grupos;
         this.nombre = nombre;
-        alumno_has_grupos = new ArrayList<>();
+        this.grupo = grupo;
     }
 
-    public Alumno(String nombre) {
+    public Alumno(String nombre, Grupo grupo) {
         this.nombre = nombre;
+        this.grupo = grupo;
         alumno_has_grupos = new ArrayList<>();
     }
 
@@ -72,6 +80,15 @@ public class Alumno implements Serializable {
 
     public void setNombre(String nombre) {
     }
+
+    public Grupo getGrupo() {
+        return grupo;
+    }
+
+    public void setGrupo(Grupo grupo) {
+        this.grupo = grupo;
+    }
+    
 
     @Override
     public int hashCode() {

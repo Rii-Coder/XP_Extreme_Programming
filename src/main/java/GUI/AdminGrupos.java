@@ -57,12 +57,18 @@ public class AdminGrupos extends javax.swing.JFrame {
     private void initComponents() {
 
         dateTimePickerFechaHoraInicio = new com.github.lgooddatepicker.components.DateTimePicker();
+        jPanel3 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
+        btnEliminarAlumno = new javax.swing.JButton();
+        btnEditarAlumno = new javax.swing.JButton();
+        btnAgregarAlumno = new javax.swing.JButton();
+        txtNombreAlumno = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         cbxCursos = new javax.swing.JComboBox<>();
-        txtNombreGrupo = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         btnLunes = new javax.swing.JToggleButton();
@@ -83,10 +89,86 @@ public class AdminGrupos extends javax.swing.JFrame {
         txtBuscar = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        txtNombreGrupo = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         getContentPane().add(dateTimePickerFechaHoraInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 190, -1, -1));
+
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Alumnos"));
+
+        jTable2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID", "Nombre", "IdGrupo"
+            }
+        ));
+        jTable2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable2MouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(jTable2);
+
+        btnEliminarAlumno.setText("Eliminar Alumno");
+
+        btnEditarAlumno.setText("Editar Alumno");
+
+        btnAgregarAlumno.setText("Agregar Alumno");
+
+        txtNombreAlumno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNombreAlumnoActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Nombre Alumno:");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 640, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtNombreAlumno)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 107, Short.MAX_VALUE)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnEliminarAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnAgregarAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnEditarAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(91, 91, 91))))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(0, 2, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtNombreAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnAgregarAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnEliminarAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnEditarAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31))
+        );
+
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 510, 970, 250));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Grupos"));
 
@@ -105,23 +187,22 @@ public class AdminGrupos extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(jTable1);
+        if (jTable1.getColumnModel().getColumnCount() > 0) {
+            jTable1.getColumnModel().getColumn(3).setHeaderValue("FechaInicio");
+        }
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 858, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 958, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 297, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE)
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 270, 880, 330));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 270, 970, 230));
 
         cbxCursos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -129,16 +210,6 @@ public class AdminGrupos extends javax.swing.JFrame {
             }
         });
         getContentPane().add(cbxCursos, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 180, 140, 30));
-
-        txtNombreGrupo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNombreGrupoActionPerformed(evt);
-            }
-        });
-        getContentPane().add(txtNombreGrupo, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 120, 140, 30));
-
-        jLabel1.setText("Nombre grupo:");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 130, -1, -1));
 
         jLabel2.setText("Seleccione el curso:");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 190, -1, -1));
@@ -203,7 +274,7 @@ public class AdminGrupos extends javax.swing.JFrame {
         });
         jPanel2.add(btnAdminCursosNavegar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 170, 90));
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 190, 470));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 170, 190, 470));
 
         btnAgregarGrupo.setText("Agregar grupo");
         btnAgregarGrupo.addActionListener(new java.awt.event.ActionListener() {
@@ -240,6 +311,16 @@ public class AdminGrupos extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Tw Cen MT", 3, 18)); // NOI18N
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 30, -1, 140));
 
+        txtNombreGrupo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNombreGrupoActionPerformed(evt);
+            }
+        });
+        getContentPane().add(txtNombreGrupo, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 120, 140, 30));
+
+        jLabel7.setText("Nombre grupo:");
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 130, -1, -1));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -264,9 +345,9 @@ public class AdminGrupos extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnImportAsistenciasNavegarActionPerformed
 
-    private void txtNombreGrupoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreGrupoActionPerformed
+    private void txtNombreAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreAlumnoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtNombreGrupoActionPerformed
+    }//GEN-LAST:event_txtNombreAlumnoActionPerformed
 
     private void cbxCursosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxCursosActionPerformed
         this.cargarGrupos(false);
@@ -274,8 +355,8 @@ public class AdminGrupos extends javax.swing.JFrame {
 
     private void btnAgregarGrupoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarGrupoActionPerformed
         Curso cursoSel = (Curso) cbxCursos.getSelectedItem();
-        grupos.agregar(new Grupo(cursoSel, txtNombreGrupo.getText(), java.sql.Date.valueOf(dateTimePickerFechaHoraInicio.getDatePicker().getDate())));
-        nuevos.add(new Grupo(cursoSel, txtNombreGrupo.getText(), java.sql.Date.valueOf(dateTimePickerFechaHoraInicio.getDatePicker().getDate())));
+        grupos.agregar(new Grupo(cursoSel, txtNombreAlumno.getText(), java.sql.Date.valueOf(dateTimePickerFechaHoraInicio.getDatePicker().getDate())));
+        nuevos.add(new Grupo(cursoSel, txtNombreAlumno.getText(), java.sql.Date.valueOf(dateTimePickerFechaHoraInicio.getDatePicker().getDate())));
         cargarGrupos(true);
     }//GEN-LAST:event_btnAgregarGrupoActionPerformed
 
@@ -283,7 +364,7 @@ public class AdminGrupos extends javax.swing.JFrame {
         if (seleccionado != null) {
             try {
                 seleccionado.setCurso((Curso) cbxCursos.getSelectedItem());
-                seleccionado.setNombre(txtNombreGrupo.getText());
+                seleccionado.setNombre(txtNombreAlumno.getText());
                 seleccionado.setFechaInicio(java.sql.Date.valueOf(dateTimePickerFechaHoraInicio.getDatePicker().getDate()));
                 grupos.actualizar(seleccionado);
                 nuevos.add(seleccionado);
@@ -301,7 +382,7 @@ public class AdminGrupos extends javax.swing.JFrame {
         Long id = (Long) (jTable1.getValueAt(seleccionar, 0));
         Grupo grupo = grupos.buscarPorId(id);
         this.seleccionado = grupo;
-        txtNombreGrupo.setText(grupo.getNombre());
+        txtNombreAlumno.setText(grupo.getNombre());
         cbxCursos.setSelectedItem(grupo.getCurso());
         Date fecha = this.addDays(grupo.getFechaInicio(), 1);
         if (!nuevos.isEmpty()) {
@@ -325,6 +406,14 @@ public class AdminGrupos extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Seleccione un grupo para poder eliminar");
         }
     }//GEN-LAST:event_btnEliminarGrupoActionPerformed
+
+    private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTable2MouseClicked
+
+    private void txtNombreGrupoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreGrupoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNombreGrupoActionPerformed
 
     private void cargarComboBoxCursos() {
         List<Curso> cursos = this.cursosDao.consultarCursos("", usuario.getId());
@@ -377,10 +466,13 @@ public class AdminGrupos extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdminCursosNavegar;
     private javax.swing.JButton btnAdminGruposNavegar;
+    private javax.swing.JButton btnAgregarAlumno;
     private javax.swing.JButton btnAgregarGrupo;
     private javax.swing.JButton btnCerrarSesion;
     private javax.swing.JButton btnConsultarAsistenciasNavegar;
+    private javax.swing.JButton btnEditarAlumno;
     private javax.swing.JButton btnEditarGrupo;
+    private javax.swing.JButton btnEliminarAlumno;
     private javax.swing.JButton btnEliminarGrupo;
     private javax.swing.JButton btnImportAsistenciasNavegar;
     private javax.swing.JToggleButton btnJueves;
@@ -396,11 +488,16 @@ public class AdminGrupos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable2;
     private javax.swing.JTextField txtBuscar;
+    private javax.swing.JTextField txtNombreAlumno;
     private javax.swing.JTextField txtNombreGrupo;
     // End of variables declaration//GEN-END:variables
 }
