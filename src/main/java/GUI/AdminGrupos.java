@@ -4,16 +4,16 @@
  */
 package GUI;
 
+import DAO.AlumnoDAO;
 import DAO.CursoDAO;
 import DAO.GrupoDAO;
+import Entities.Alumno;
 import Entities.Curso;
 import Entities.Grupo;
 import Entities.Maestro;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.sql.Date;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -30,7 +30,9 @@ public class AdminGrupos extends javax.swing.JFrame {
     private Maestro usuario;
     private GrupoDAO grupos;
     private CursoDAO cursosDao;
+    private AlumnoDAO alumnos;
     private Grupo seleccionado;
+    private Alumno seleccionadoA;
     private List<Grupo> nuevos;
 
     /**
@@ -42,6 +44,7 @@ public class AdminGrupos extends javax.swing.JFrame {
         this.usuario = usuario;
         grupos = new GrupoDAO();
         cursosDao = new CursoDAO();
+        alumnos = new AlumnoDAO();
         nuevos = new ArrayList<>();
         cargarComboBoxCursos();
         cargarGrupos(false);
@@ -115,14 +118,23 @@ public class AdminGrupos extends javax.swing.JFrame {
         jScrollPane2.setViewportView(jTable2);
 
         btnEliminarAlumno.setText("Eliminar Alumno");
+        btnEliminarAlumno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarAlumnoActionPerformed(evt);
+            }
+        });
 
         btnEditarAlumno.setText("Editar Alumno");
+        btnEditarAlumno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarAlumnoActionPerformed(evt);
+            }
+        });
 
         btnAgregarAlumno.setText("Agregar Alumno");
-
-        txtNombreAlumno.addActionListener(new java.awt.event.ActionListener() {
+        btnAgregarAlumno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNombreAlumnoActionPerformed(evt);
+                btnAgregarAlumnoActionPerformed(evt);
             }
         });
 
@@ -136,14 +148,14 @@ public class AdminGrupos extends javax.swing.JFrame {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 640, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(10, 10, 10)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtNombreAlumno)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addGap(0, 0, Short.MAX_VALUE)))
                         .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                    .addGroup(jPanel3Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 107, Short.MAX_VALUE)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(btnEliminarAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -153,7 +165,6 @@ public class AdminGrupos extends javax.swing.JFrame {
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(0, 2, Short.MAX_VALUE)
                 .addComponent(jLabel1)
@@ -166,6 +177,9 @@ public class AdminGrupos extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(btnEditarAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 510, 970, 250));
@@ -319,7 +333,7 @@ public class AdminGrupos extends javax.swing.JFrame {
         getContentPane().add(txtNombreGrupo, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 120, 140, 30));
 
         jLabel7.setText("Nombre grupo:");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 130, -1, -1));
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 130, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -345,28 +359,24 @@ public class AdminGrupos extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnImportAsistenciasNavegarActionPerformed
 
-    private void txtNombreAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreAlumnoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNombreAlumnoActionPerformed
-
     private void cbxCursosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxCursosActionPerformed
         this.cargarGrupos(false);
     }//GEN-LAST:event_cbxCursosActionPerformed
 
     private void btnAgregarGrupoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarGrupoActionPerformed
         Curso cursoSel = (Curso) cbxCursos.getSelectedItem();
-        grupos.agregar(new Grupo(cursoSel, txtNombreAlumno.getText(), java.sql.Date.valueOf(dateTimePickerFechaHoraInicio.getDatePicker().getDate())));
-        nuevos.add(new Grupo(cursoSel, txtNombreAlumno.getText(), java.sql.Date.valueOf(dateTimePickerFechaHoraInicio.getDatePicker().getDate())));
+        grupos.agregar(new Grupo(cursoSel, txtNombreGrupo.getText(), java.sql.Date.valueOf(dateTimePickerFechaHoraInicio.getDatePicker().getDate())));
+        nuevos.add(new Grupo(cursoSel, txtNombreGrupo.getText(), java.sql.Date.valueOf(dateTimePickerFechaHoraInicio.getDatePicker().getDate())));
         cargarGrupos(true);
-        
-        
+
+
     }//GEN-LAST:event_btnAgregarGrupoActionPerformed
 
     private void btnEditarGrupoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarGrupoActionPerformed
         if (seleccionado != null) {
             try {
                 seleccionado.setCurso((Curso) cbxCursos.getSelectedItem());
-                seleccionado.setNombre(txtNombreAlumno.getText());
+                seleccionado.setNombre(txtNombreGrupo.getText());
                 seleccionado.setFechaInicio(java.sql.Date.valueOf(dateTimePickerFechaHoraInicio.getDatePicker().getDate()));
                 grupos.actualizar(seleccionado);
                 nuevos.add(seleccionado);
@@ -384,7 +394,7 @@ public class AdminGrupos extends javax.swing.JFrame {
         Long id = (Long) (jTable1.getValueAt(seleccionar, 0));
         Grupo grupo = grupos.buscarPorId(id);
         this.seleccionado = grupo;
-        txtNombreAlumno.setText(grupo.getNombre());
+        txtNombreGrupo.setText(grupo.getNombre());
         cbxCursos.setSelectedItem(grupo.getCurso());
         Date fecha = this.addDays(grupo.getFechaInicio(), 1);
         if (!nuevos.isEmpty()) {
@@ -394,6 +404,7 @@ public class AdminGrupos extends javax.swing.JFrame {
             }
         }
         dateTimePickerFechaHoraInicio.setDateTimeStrict(fecha.toLocalDate().atStartOfDay());
+        cargarAlumnos();
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void btnEliminarGrupoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarGrupoActionPerformed
@@ -410,12 +421,40 @@ public class AdminGrupos extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEliminarGrupoActionPerformed
 
     private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseClicked
-        // TODO add your handling code here:
+        int seleccionar = jTable2.rowAtPoint(evt.getPoint());
+        Long id = (Long) (jTable2.getValueAt(seleccionar, 0));
+        Alumno alumno = alumnos.buscarPorId(id);
+        this.seleccionadoA = alumno;
+        txtNombreAlumno.setText(alumno.getNombre());
+        
     }//GEN-LAST:event_jTable2MouseClicked
 
     private void txtNombreGrupoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreGrupoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNombreGrupoActionPerformed
+
+    private void btnAgregarAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarAlumnoActionPerformed
+        if (seleccionado != null && !txtNombreAlumno.equals("")) {
+            alumnos.agregar(new Alumno(txtNombreAlumno.getText(), seleccionado));
+        }
+        cargarAlumnos();
+    }//GEN-LAST:event_btnAgregarAlumnoActionPerformed
+
+    private void btnEliminarAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarAlumnoActionPerformed
+        if (seleccionado != null && !txtNombreAlumno.equals("") && seleccionadoA != null) {
+            alumnos.eliminar(seleccionadoA.getId());
+        }
+        cargarAlumnos();
+    }//GEN-LAST:event_btnEliminarAlumnoActionPerformed
+
+    private void btnEditarAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarAlumnoActionPerformed
+        if (seleccionado != null && !txtNombreAlumno.equals("") && seleccionadoA != null) {
+            seleccionadoA.setNombre(txtNombreAlumno.getText());
+            seleccionadoA.setGrupo(seleccionado);
+            alumnos.actualizar(seleccionadoA);
+        }
+        cargarAlumnos();
+    }//GEN-LAST:event_btnEditarAlumnoActionPerformed
 
     private void cargarComboBoxCursos() {
         List<Curso> cursos = this.cursosDao.consultarCursos("", usuario.getId());
@@ -443,6 +482,17 @@ public class AdminGrupos extends javax.swing.JFrame {
         }
         this.grupos = new GrupoDAO();
     }
+
+    private void cargarAlumnos() {
+        List<Alumno> alumnos = this.alumnos.consultarAlumnos("", seleccionado.getId());
+        DefaultTableModel modelo = (DefaultTableModel) jTable2.getModel();
+        modelo.setRowCount(0);
+        
+        for (Alumno alumno : alumnos) {
+            modelo.addRow(alumno.toArray());
+        }
+    }
+    
 
     private Date addDays(Date date, int days) {
         Calendar c = Calendar.getInstance();

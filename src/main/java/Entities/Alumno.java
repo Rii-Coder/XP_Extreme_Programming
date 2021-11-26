@@ -79,6 +79,7 @@ public class Alumno implements Serializable {
     }
 
     public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public Grupo getGrupo() {
@@ -124,6 +125,16 @@ public class Alumno implements Serializable {
     @Override
     public String toString() {
         return "Alumno{" + "id=" + id + ", nombre=" + nombre + '}';
+    }
+    
+    public Object[] toArray() {
+        return new Object[]{
+            this.id,
+            this.nombre,
+            this.grupo.getId()
+            
+        };
+
     }
 
 }

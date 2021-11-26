@@ -45,6 +45,7 @@ public class AlumnoDAO extends BaseDAO<Alumno> {
         if (alumno != null) {
             alumno.setNombre(entidad.getNombre());
             alumno.setAlumno_has_grupos(entidad.getAlumno_has_grupos());
+            alumno.setGrupo(entidad.getGrupo());
             entityManager.merge(alumno);
         }
         entityManager.getTransaction().commit();
@@ -69,6 +70,23 @@ public class AlumnoDAO extends BaseDAO<Alumno> {
         List<Alumno> alumno = query.getResultList();
         entityManager.getTransaction().commit();
         return new ArrayList<>(alumno);
+    }
+    
+    public List<Alumno> consultarAlumnos(String nombre, long id){
+        EntityManager entityManager = this.createEntityManager();
+        entityManager.getTransaction().begin();
+        
+        List<Alumno> alumnos;
+         if (!nombre.equals("")) {
+            String jpql = "SELECT * FROM dTKxX176tm.Grupo WHERE dTKxX176tm.Alumno.idGrupo ="+ id + " AND dTKxX176tm.Alumno.Nombre LIKE '"+"%"+nombre+"%"+"';";
+            alumnos = entityManager.createNativeQuery(jpql, Alumno.class).getResultList();
+        } else {
+            String jpql = String.format("SELECT * FROM dTKxX176tm.Alumno WHERE dTKxX176tm.Alumno.idGrupo = %s;", id);
+            alumnos = entityManager.createNativeQuery(jpql, Alumno.class).getResultList();
+        }
+        entityManager.getTransaction().commit();
+        return alumnos;
+        
     }
     
 }
