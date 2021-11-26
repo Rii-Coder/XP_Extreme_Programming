@@ -358,6 +358,8 @@ public class AdminGrupos extends javax.swing.JFrame {
         grupos.agregar(new Grupo(cursoSel, txtNombreAlumno.getText(), java.sql.Date.valueOf(dateTimePickerFechaHoraInicio.getDatePicker().getDate())));
         nuevos.add(new Grupo(cursoSel, txtNombreAlumno.getText(), java.sql.Date.valueOf(dateTimePickerFechaHoraInicio.getDatePicker().getDate())));
         cargarGrupos(true);
+        
+        
     }//GEN-LAST:event_btnAgregarGrupoActionPerformed
 
     private void btnEditarGrupoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarGrupoActionPerformed
