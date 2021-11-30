@@ -89,4 +89,19 @@ public class AlumnoDAO extends BaseDAO<Alumno> {
         
     }
     
+     public List<Alumno> consultarAlumnosNombre(String nombre) {
+        EntityManager entityManager = this.createEntityManager();
+        entityManager.getTransaction().begin();
+        //SELECT * FROM clientes WHERE nombre LIKE '%a%' or nombre LIKE '%r%' ;
+        List<Alumno> alumnos;
+        if (!nombre.equals("")) {
+            String jpql = "SELECT * FROM dTKxX176tm.Grupo WHERE dTKxX176tm.Alumno.Nombre LIKE " + "%" + nombre + "%" + "';";
+            alumnos = entityManager.createNativeQuery(jpql, Alumno.class).getResultList();
+        } else {
+            return null;
+        }
+        entityManager.getTransaction().commit();
+        return alumnos;
+    }
+    
 }
