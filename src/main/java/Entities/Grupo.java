@@ -143,7 +143,7 @@ public class Grupo {
 
     @Override
     public String toString() {
-        return "Grupo{" + "id=" + id + ", curso=" + curso + ", nombre=" + nombre + ", fechaInicio=" + fechaInicio + '}';
+        return this.nombre;
     }
     
     public Object[] toArray() {

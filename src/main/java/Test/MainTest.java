@@ -12,6 +12,8 @@ import Entities.Curso;
 import Entities.Grupo;
 import Entities.Maestro;
 import ObjetoNegocio.CsvImport;
+import java.util.ArrayList;
+import javax.swing.JTable;
 
 /**
  *
@@ -23,12 +25,13 @@ public class MainTest {
         
         
         
-//        CsvImport csv = new CsvImport();
-//        try {
-//            csv.leer();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
+        CsvImport csv = new CsvImport();
+        try {
+            csv.CargarTabla(new JTable());
+            ArrayList<String> alumnos = csv.ObtenerAlumnos();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         
 //        GrupoDAO grupos = new MaestroDAO();
 //        try {

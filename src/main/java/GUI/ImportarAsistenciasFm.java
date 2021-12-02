@@ -4,10 +4,21 @@
  */
 package GUI;
 
+import DAO.AlumnoHasGrupoDAO;
+import DAO.CursoDAO;
+import DAO.GrupoDAO;
+import Entities.Alumno_has_grupo;
+import Entities.Curso;
+import Entities.Grupo;
 import Entities.Maestro;
 import ObjetoNegocio.CsvImport;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.sql.Date;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -16,13 +27,25 @@ import java.awt.Toolkit;
 public class ImportarAsistenciasFm extends javax.swing.JFrame {
 
     private Maestro usuario;
+    private CursoDAO cursoDao;
+    private GrupoDAO grupos;
+    private boolean csvImport;
+    private CsvImport csv;
     
     /**
      * Creates new form ImportarAsistenciasFm
      */
     public ImportarAsistenciasFm(Maestro usuario) {
         initComponents();
+        centrarPantalla();
         this.usuario = usuario;
+        this.cursoDao = new CursoDAO();
+        grupos = new GrupoDAO();
+        csvImport = false;
+        btnConfirmarAsistencias.setEnabled(false);
+        csv = new CsvImport();
+        cargarComboBoxCursos();
+        cargarComboBoxGrupos();
     }
 
     /**
@@ -51,6 +74,7 @@ public class ImportarAsistenciasFm extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         btnConfirmarAsistencias = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
+        lblStatus = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -89,7 +113,7 @@ public class ImportarAsistenciasFm extends javax.swing.JFrame {
                 .addGap(0, 7, Short.MAX_VALUE))
         );
 
-        getContentPane().add(panelAlumnos, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 160, 660, 420));
+        getContentPane().add(panelAlumnos, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 210, 660, 420));
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Navegar"));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -148,16 +172,21 @@ public class ImportarAsistenciasFm extends javax.swing.JFrame {
         getContentPane().add(btnCerrarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 180, 60));
 
         cbxGrupos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        getContentPane().add(cbxGrupos, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 100, 180, 50));
+        getContentPane().add(cbxGrupos, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 150, 180, 50));
 
         jLabel1.setText("Seleccione un grupo:");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 80, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 130, -1, -1));
 
         cbxCursos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        getContentPane().add(cbxCursos, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 100, 160, 50));
+        cbxCursos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxCursosActionPerformed(evt);
+            }
+        });
+        getContentPane().add(cbxCursos, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 150, 160, 50));
 
         jLabel2.setText("Seleccione un curso:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 80, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 130, -1, -1));
 
         btnBuscarArchivoEnMiPc.setFont(new java.awt.Font("Tahoma", 3, 12)); // NOI18N
         btnBuscarArchivoEnMiPc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/folder_beige_explorer.png"))); // NOI18N
@@ -167,16 +196,21 @@ public class ImportarAsistenciasFm extends javax.swing.JFrame {
                 btnBuscarArchivoEnMiPcActionPerformed(evt);
             }
         });
-        getContentPane().add(btnBuscarArchivoEnMiPc, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 100, 170, 50));
+        getContentPane().add(btnBuscarArchivoEnMiPc, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 150, 170, 50));
 
         jLabel3.setText("Importar CSV");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 80, -1, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 130, -1, -1));
 
         btnConfirmarAsistencias.setBackground(new java.awt.Color(153, 204, 0));
         btnConfirmarAsistencias.setFont(new java.awt.Font("Tahoma", 3, 12)); // NOI18N
         btnConfirmarAsistencias.setForeground(new java.awt.Color(0, 153, 0));
         btnConfirmarAsistencias.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Tips.png"))); // NOI18N
         btnConfirmarAsistencias.setText("Confirmar asistencias");
+        btnConfirmarAsistencias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConfirmarAsistenciasActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnConfirmarAsistencias, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 10, 250, 60));
 
         jLabel4.setFont(new java.awt.Font("UD Digi Kyokasho N-B", 0, 36)); // NOI18N
@@ -184,6 +218,9 @@ public class ImportarAsistenciasFm extends javax.swing.JFrame {
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/noted_note_pen_notebook_write_icon_193919 (2).png"))); // NOI18N
         jLabel4.setText("ASSISTANCER");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 10, 300, -1));
+
+        lblStatus.setText("Estado: ");
+        getContentPane().add(lblStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 80, 240, 30));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -211,17 +248,53 @@ public class ImportarAsistenciasFm extends javax.swing.JFrame {
 
     private void btnBuscarArchivoEnMiPcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarArchivoEnMiPcActionPerformed
         cargarTabla();
+        this.csvImport = true;
+        listoConfirmar();
     }//GEN-LAST:event_btnBuscarArchivoEnMiPcActionPerformed
 
+    private void btnConfirmarAsistenciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarAsistenciasActionPerformed
+        
+        Grupo grupoSel = (Grupo) cbxGrupos.getSelectedItem();
+        lblStatus.setText("Estado: Verificando...");
+        
+        if(csv.verificarAlumnosCsv(grupoSel.getId())){
+            lblStatus.setText("Estado: Generando asistencias...");
+            csv.agregarAlumnosCsv(grupoSel);
+        }
+        lblStatus.setText("Estado: ");
+        
+        
+    }//GEN-LAST:event_btnConfirmarAsistenciasActionPerformed
+
+    private void cbxCursosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxCursosActionPerformed
+        cargarComboBoxGrupos();
+        listoConfirmar();
+    }//GEN-LAST:event_cbxCursosActionPerformed
+
     private void cargarTabla() {
-        CsvImport csv = new CsvImport();
         try {
-            csv.CargarTabla(TableAlumnosCSV);
+            this.csv.CargarTabla(TableAlumnosCSV);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
     
+    private void listoConfirmar(){
+        if (csvImport == true) {
+            btnConfirmarAsistencias.setEnabled(true);
+        }
+    }
+    
+    private void cargarComboBoxCursos() {
+        List<Curso> cursos = this.cursoDao.consultarCursos("", usuario.getId());
+        cbxCursos.setModel(new DefaultComboBoxModel(cursos.toArray()));
+    }
+
+    private void cargarComboBoxGrupos() {
+        Curso cursoSel = (Curso) cbxCursos.getSelectedItem();
+        List<Grupo> grupos = this.grupos.consultarGrupos("", cursoSel.getId());
+        cbxGrupos.setModel(new DefaultComboBoxModel(grupos.toArray()));
+    }
    
     public void centrarPantalla() {
         Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
@@ -247,6 +320,7 @@ public class ImportarAsistenciasFm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblStatus;
     private javax.swing.JPanel panelAlumnos;
     // End of variables declaration//GEN-END:variables
 }

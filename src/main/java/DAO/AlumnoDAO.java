@@ -78,7 +78,7 @@ public class AlumnoDAO extends BaseDAO<Alumno> {
         
         List<Alumno> alumnos;
          if (!nombre.equals("")) {
-            String jpql = "SELECT * FROM dTKxX176tm.Grupo WHERE dTKxX176tm.Alumno.idGrupo ="+ id + " AND dTKxX176tm.Alumno.Nombre LIKE '"+"%"+nombre+"%"+"';";
+            String jpql = "SELECT * FROM dTKxX176tm.Alumno WHERE dTKxX176tm.Alumno.idGrupo ="+ id + " AND dTKxX176tm.Alumno.Nombre LIKE '"+"%"+nombre+"%"+"';";
             alumnos = entityManager.createNativeQuery(jpql, Alumno.class).getResultList();
         } else {
             String jpql = String.format("SELECT * FROM dTKxX176tm.Alumno WHERE dTKxX176tm.Alumno.idGrupo = %s;", id);
@@ -89,19 +89,25 @@ public class AlumnoDAO extends BaseDAO<Alumno> {
         
     }
     
-     public List<Alumno> consultarAlumnosNombre(String nombre) {
+     public Alumno consultarAlumnosNombre(String nombre, long id)  {
         EntityManager entityManager = this.createEntityManager();
         entityManager.getTransaction().begin();
         //SELECT * FROM clientes WHERE nombre LIKE '%a%' or nombre LIKE '%r%' ;
-        List<Alumno> alumnos;
+        Alumno alumno;
         if (!nombre.equals("")) {
-            String jpql = "SELECT * FROM dTKxX176tm.Grupo WHERE dTKxX176tm.Alumno.Nombre LIKE " + "%" + nombre + "%" + "';";
-            alumnos = entityManager.createNativeQuery(jpql, Alumno.class).getResultList();
+            String jpql = "SELECT * FROM dTKxX176tm.Alumno WHERE dTKxX176tm.Alumno.idGrupo ="+ id +" AND dTKxX176tm.Alumno.Nombre LIKE '" + "%" + nombre + "%" + "';";
+            
+            try {
+                alumno = (Alumno) entityManager.createNativeQuery(jpql, Alumno.class).getSingleResult();
+            } catch (Exception e) {
+                return null;
+            }
+            
         } else {
             return null;
         }
         entityManager.getTransaction().commit();
-        return alumnos;
+        return alumno;
     }
     
 }

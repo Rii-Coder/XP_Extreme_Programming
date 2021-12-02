@@ -397,8 +397,8 @@ public class AdminGrupos extends javax.swing.JFrame {
         if (txtNombreGrupo.getText().equalsIgnoreCase("")) {
             JOptionPane.showMessageDialog(null, "Verifique que el nombre del grupo no esté vacío");
         } else {
-            grupos.agregar(new Grupo(cursoSel, txtNombreAlumno.getText(), java.sql.Date.valueOf(dateTimePickerFechaHoraInicio.getDatePicker().getDate())));
-            nuevos.add(new Grupo(cursoSel, txtNombreAlumno.getText(), java.sql.Date.valueOf(dateTimePickerFechaHoraInicio.getDatePicker().getDate())));
+            grupos.agregar(new Grupo(cursoSel, txtNombreGrupo.getText(), java.sql.Date.valueOf(dateTimePickerFechaHoraInicio.getDatePicker().getDate())));
+            nuevos.add(new Grupo(cursoSel, txtNombreGrupo.getText(), java.sql.Date.valueOf(dateTimePickerFechaHoraInicio.getDatePicker().getDate())));
             cargarGrupos(true);
         }
     }//GEN-LAST:event_btnAgregarGrupoActionPerformed
