@@ -184,7 +184,7 @@ public class RegistrarseGUI extends javax.swing.JFrame {
             Matcher mather = pattern.matcher(correo);
 
             //Validaciones y metodo para registrar un usuario.
-            if (txtNombre.getText().equalsIgnoreCase("") && txtCorreoElectronico.getText().equalsIgnoreCase("") && txtConfirmarContraseña.getText().equalsIgnoreCase("") && txtContraseña.getText().equalsIgnoreCase("")) {
+            if (txtNombre.getText().isBlank() || txtCorreoElectronico.getText().isBlank() || txtConfirmarContraseña.getText().isBlank() || txtContraseña.getText().isBlank()) {
                 JOptionPane.showMessageDialog(null, "Por favor llene todos los campos para poder registrarse correctamente");
             } else {
                 //Valida el correo mediante la expresión regular

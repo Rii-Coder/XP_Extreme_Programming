@@ -237,12 +237,15 @@ public class CsvImport {
                     }
                     c++;
                 }
+                
+                System.out.println("Ya se cargó desde dentro");
 
             } catch (IOException e) {
                 e.printStackTrace();
             }
 
         } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
 
     }

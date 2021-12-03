@@ -74,12 +74,6 @@ public class AdminGrupos extends javax.swing.JFrame {
         cbxCursos = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        btnLunes = new javax.swing.JToggleButton();
-        btnMartes = new javax.swing.JToggleButton();
-        btnMiercoles = new javax.swing.JToggleButton();
-        btnJueves = new javax.swing.JToggleButton();
-        btnViernes = new javax.swing.JToggleButton();
-        jLabel4 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         btnConsultarAsistenciasNavegar = new javax.swing.JButton();
         btnAdminGruposNavegar = new javax.swing.JButton();
@@ -91,14 +85,13 @@ public class AdminGrupos extends javax.swing.JFrame {
         btnCerrarSesion = new javax.swing.JButton();
         txtBuscar = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
         txtNombreGrupo = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        getContentPane().add(dateTimePickerFechaHoraInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 290, -1, -1));
+        getContentPane().add(dateTimePickerFechaHoraInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 220, -1, -1));
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Alumnos"));
 
@@ -233,25 +226,7 @@ public class AdminGrupos extends javax.swing.JFrame {
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 290, -1, -1));
 
         jLabel3.setText("Fecha y hora de inicio:");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 290, -1, 20));
-
-        btnLunes.setText("Lunes");
-        getContentPane().add(btnLunes, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 230, 70, -1));
-
-        btnMartes.setText("Martes");
-        getContentPane().add(btnMartes, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 230, -1, -1));
-
-        btnMiercoles.setText("Miércoles");
-        getContentPane().add(btnMiercoles, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 230, -1, -1));
-
-        btnJueves.setText("Jueves");
-        getContentPane().add(btnJueves, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 230, -1, -1));
-
-        btnViernes.setText("Viernes");
-        getContentPane().add(btnViernes, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 230, -1, -1));
-
-        jLabel4.setText("¿Qué dia/dias de la semana se llevará a cabo la clase?");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 210, -1, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 220, -1, 20));
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Navegar"));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -341,10 +316,6 @@ public class AdminGrupos extends javax.swing.JFrame {
         jLabel5.setText("Buscar:");
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 340, -1, 20));
 
-        jLabel6.setText("ESTOS SON TOGGLES BUTTONS, ES PA SABER QUÉ DÍAS SON LAS CLASES");
-        jLabel6.setFont(new java.awt.Font("Tw Cen MT", 3, 18)); // NOI18N
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 130, -1, 140));
-
         txtNombreGrupo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNombreGrupoActionPerformed(evt);
@@ -396,8 +367,11 @@ public class AdminGrupos extends javax.swing.JFrame {
 
         if (txtNombreGrupo.getText().equalsIgnoreCase("")) {
             JOptionPane.showMessageDialog(null, "Verifique que el nombre del grupo no esté vacío");
+        } else if (dateTimePickerFechaHoraInicio.getDatePicker().getDate() == null) {
+            
+           JOptionPane.showMessageDialog(null, "Seleccione una fecha de inicio");
         } else {
-            grupos.agregar(new Grupo(cursoSel, txtNombreGrupo.getText(), java.sql.Date.valueOf(dateTimePickerFechaHoraInicio.getDatePicker().getDate())));
+             grupos.agregar(new Grupo(cursoSel, txtNombreGrupo.getText(), java.sql.Date.valueOf(dateTimePickerFechaHoraInicio.getDatePicker().getDate())));
             nuevos.add(new Grupo(cursoSel, txtNombreGrupo.getText(), java.sql.Date.valueOf(dateTimePickerFechaHoraInicio.getDatePicker().getDate())));
             cargarGrupos(true);
         }
@@ -467,6 +441,8 @@ public class AdminGrupos extends javax.swing.JFrame {
     private void btnAgregarAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarAlumnoActionPerformed
         if (seleccionado != null && !txtNombreAlumno.equals("")) {
             alumnos.agregar(new Alumno(txtNombreAlumno.getText(), seleccionado));
+        } else {
+            JOptionPane.showMessageDialog(null, "Verifique que haya seleccionado un grupo y que el nombre del alumno no está en blanco.");
         }
         cargarAlumnos();
     }//GEN-LAST:event_btnAgregarAlumnoActionPerformed
@@ -474,6 +450,8 @@ public class AdminGrupos extends javax.swing.JFrame {
     private void btnEliminarAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarAlumnoActionPerformed
         if (seleccionado != null && !txtNombreAlumno.equals("") && seleccionadoA != null) {
             alumnos.eliminar(seleccionadoA.getId());
+        } else {
+            JOptionPane.showMessageDialog(null, "Verifique que haya seleccionado un grupo y un alumno.");
         }
         cargarAlumnos();
     }//GEN-LAST:event_btnEliminarAlumnoActionPerformed
@@ -483,6 +461,8 @@ public class AdminGrupos extends javax.swing.JFrame {
             seleccionadoA.setNombre(txtNombreAlumno.getText());
             seleccionadoA.setGrupo(seleccionado);
             alumnos.actualizar(seleccionadoA);
+        } else {
+            JOptionPane.showMessageDialog(null, "Verifique que haya seleccionado un grupo y un alumno.");
         }
         cargarAlumnos();
     }//GEN-LAST:event_btnEditarAlumnoActionPerformed
@@ -558,19 +538,12 @@ public class AdminGrupos extends javax.swing.JFrame {
     private javax.swing.JButton btnEliminarAlumno;
     private javax.swing.JButton btnEliminarGrupo;
     private javax.swing.JButton btnImportAsistenciasNavegar;
-    private javax.swing.JToggleButton btnJueves;
-    private javax.swing.JToggleButton btnLunes;
-    private javax.swing.JToggleButton btnMartes;
-    private javax.swing.JToggleButton btnMiercoles;
-    private javax.swing.JToggleButton btnViernes;
     private javax.swing.JComboBox<String> cbxCursos;
     private com.github.lgooddatepicker.components.DateTimePicker dateTimePickerFechaHoraInicio;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;

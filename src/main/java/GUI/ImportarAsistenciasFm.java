@@ -274,6 +274,7 @@ public class ImportarAsistenciasFm extends javax.swing.JFrame {
     private void cargarTabla() {
         try {
             this.csv.CargarTabla(TableAlumnosCSV);
+            System.out.println("Ya la cargué");
         } catch (Exception e) {
             e.printStackTrace();
         }

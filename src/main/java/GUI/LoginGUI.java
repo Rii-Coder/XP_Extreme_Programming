@@ -181,6 +181,13 @@ public class LoginGUI extends javax.swing.JFrame {
 
     private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
         Maestro maestro = null; // Iniciamos un maestro auxiliar
+        
+        if(txtContraseña.getText().isBlank() || txtCorreo.getText().isBlank()){
+            
+            JOptionPane.showMessageDialog(null, "Compruebe que ambos campos esten llenos");
+        } else {
+        
+        
         try {
             // Utilizamos el constructor especial que cifra la contraseña en automático
             maestro = new Maestro(txtCorreo.getText(), String.valueOf(txtContraseña.getPassword()));
@@ -202,7 +209,7 @@ public class LoginGUI extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Las credenciales son incorrectas. Por favor reintente");
         }
 
-
+        }
     }//GEN-LAST:event_btnIngresarActionPerformed
 
     private void btnRegistrarmeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarmeActionPerformed
